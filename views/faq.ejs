@@ -1,0 +1,55 @@
+<%- include('partials/header') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <img
+        class="img-fluid anime-image"
+        src="../upload/imageContent-1594810665324.jpg"
+        alt="image"
+      />
+      <div><%- post[post.length - 1].faq %></div>
+    </div>
+    <div class="col-sm-4">
+      <div
+        class="toast-anime sticky-top"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-header">
+          <img
+            src="../img/nimedesu.jpg"
+            class="toast-img"
+            alt="NimeDesu Image"
+          />
+          <strong class="mr-auto">NimeDesu</strong>
+          <small>2020</small>
+        </div>
+        <div class="toast-body">
+          Thanks for visiting this website hope you enjoyed and dont forget to
+          follow on social media :
+          <ul class="list-group">
+            <li class="list-group-item">
+              <a href="https://www.instagram.com/yunstech"
+                ><i class="fab fa-instagram"></i> Instagram</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a href="https://www.twitter.com/yunstech"
+                ><i class="fab fa-twitter"></i> Twitter</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a href="https://www.youtube.com/channel/UCERKaZ4cFgYO69rz8SgjC4g"
+                ><i class="fab fa-youtube"></i> Youtube</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

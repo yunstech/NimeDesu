@@ -1,0 +1,21 @@
+
+<%- include('partials/admin-header') %>
+<div class="container">
+  <div class="row">
+   <% post.reverse() %>
+   <% post.forEach(function(item, index) { %>
+    <div class="col-sm-4 card-admin">
+     <div class="card " style="width: 18rem;">
+       <img src="upload/<%= item.img %>" class="card-img-top" alt="<%= item.judul %>">
+       <div class="card-body">
+         <h5 class="card-title"><%= item.judul %></h5>
+         <p class="card-text"><%= truncateString(item.sinopsis, 80) %></p>
+         <a href="/delete/<%= item._id %>" class="btn btn-primary">Delete</a>
+       </div>
+     </div>
+    </div>
+    <% }) %>
+  </div>
+</div>
+
+   <%- include('partials/admin-footer') %>

@@ -1,0 +1,11 @@
+<%- include('partials/header') %>
+
+<form action="/edit-post" method="POST">
+  <textarea id="summernote" name="faq">
+<%= post[post.length - 1].faq %></textarea
+  >
+  <button type="submit" class="btn btn-primary">Upload</button>
+  <br />
+</form>
+
+<%- include('partials/footer') %>

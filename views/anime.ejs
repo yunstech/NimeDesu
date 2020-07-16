@@ -1,0 +1,76 @@
+<%- include('partials/header') %>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <img class="img-fluid anime-image" src="../upload/<%= info.img %>" alt="<%= info.judul %>">
+
+     <span>Uploaded By : <a href="https://www.instagram.com/yunstech">@Yunstech</a> With ❤</span>
+     <br>
+     <br>
+     <span>Upload Date : <%= info.created_on %></span>
+     <br>
+     <br>
+     <span>Fix Date : <%= info.edited_on %></span>
+     <br><br>
+      
+      
+
+      <div class="info-anime mt-20">
+        <ul class="list-group">
+          <h2 class="list-group-item list-group-item-action active">Info Seputar <%= info.judul %></h2>
+          <li class="list-group-item info-anime-item">Judul Alternatif : <%= info.judulAlternatif %></li>
+          <li class="list-group-item info-anime-item">Jumlah Episode : <%= info.jumlahEpisode %></li>
+          <li class="list-group-item info-anime-item">Musim Rilis : <%= info.musimRilis %></li>
+          <li class="list-group-item info-anime-item">Tanggal Tayang : <%= info.tanggalTayang %></li>
+          <li class="list-group-item info-anime-item">Studio yang Memproduksi : <%= info.studio %></li>
+          <li class="list-group-item info-anime-item">Durasi per Episode : <%= info.durasi %></li>
+          <li class="list-group-item info-anime-item">Genre : <%= info.genre %></li>
+          <li class="list-group-item info-anime-item">Skor di MyAnimeList :  <%= info.skor %> </li>
+          <li class="list-group-item info-anime-item">Credit : <%= info.credit %></li>
+        </ul>
+        
+      </div>
+
+      <div class="sinopsis alert-success">
+        <h2 class="list-group-item list-group-item-action active mt-30">Sinopsis <%= info.judul %></h2>
+        <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+          <p><%= info.sinopsis %></p>
+        </div>
+      </div>
+      <div class="link-download">
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          <%= info.judul %> Download Link
+        </a>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            <div id="linkB" name="linkB"><%- info.link %></div>
+          </div>
+        </div>
+      </div>
+      
+
+    </div>
+    <div class="col-sm-4">
+      <div class="toast-anime sticky-top" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <img src="../img/nimedesu.jpg" class="toast-img" alt="NimeDesu Image">
+          <strong class="mr-auto">NimeDesu</strong>
+          <small><%= date %></small>
+        </div>
+        <div class="toast-body">
+          Thanks for visiting this website hope you enjoyed and dont forget to follow on social media :
+          <ul class="list-group">
+            <li class="list-group-item"><a href="https://www.instagram.com/yunstech"><i class="fab fa-instagram"></i> Instagram</a></li>
+            <li class="list-group-item"><a href="https://www.twitter.com/yunstech"><i class="fab fa-twitter"></i> Twitter</a></li>
+            <li class="list-group-item"><a href="https://www.youtube.com/channel/UCERKaZ4cFgYO69rz8SgjC4g"><i class="fab fa-youtube"></i> Youtube</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+<%- include('partials/footer') %>

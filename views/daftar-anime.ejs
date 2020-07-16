@@ -1,0 +1,77 @@
+<%- include('partials/header') %>
+
+<div class="container daftar-anime">
+  <div class="row">
+    <div class="col-sm-8 column1">
+      <ul class="list-group">
+        <li class="list-group-item active">Daftar Anime</li>
+        <% anime.forEach(function(item, index) { %>
+        <li class="list-group-item">
+          <div class="card-anime">
+            <a href="/anime/<%= item._id %>"
+              ><%= truncateString(item.judul, 40) %></a
+            >
+            <div class="card-daftar-anime">
+              <img
+                src="upload/<%= item.img %>"
+                class="card-img-top img-thumbnail"
+                alt="..."
+              />
+              <p class="card-text">
+                Sinopsis : <%= truncateString(item.sinopsis, 100) %>
+              </p>
+              <p class="card-text">
+                Genre: <%= truncateString(item.genre, 30) %>
+              </p>
+              <p class="card-text">
+                Score : <%= truncateString(item.skor, 30) %>
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <%})%>
+      </ul>
+    </div>
+    <div class="col-sm-4">
+      <div
+        class="toast-anime sticky-top"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-header">
+          <img
+            src="../img/nimedesu.jpg"
+            class="toast-img"
+            alt="NimeDesu Image"
+          />
+          <strong class="mr-auto">NimeDesu</strong>
+          <small>2020</small>
+        </div>
+        <div class="toast-body">
+          Thanks for visiting this website hope you enjoyed and dont forget to
+          follow on social media :
+          <ul class="list-group">
+            <li class="list-group-item">
+              <a href="https://www.instagram.com/yunstech"
+                ><i class="fab fa-instagram"></i> Instagram</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a href="https://www.twitter.com/yunstech"
+                ><i class="fab fa-twitter"></i> Twitter</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a href="https://www.youtube.com/channel/UCERKaZ4cFgYO69rz8SgjC4g"
+                ><i class="fab fa-youtube"></i> Youtube</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') %>

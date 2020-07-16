@@ -1,0 +1,129 @@
+<%- include('partials/admin-header') %>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Upload</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <!-- Form Upload Content -->
+
+      <form
+        action="/upload-content"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Judul :</label>
+          <input type="text" class="form-control" name="judulContent" />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Judul ALternatif :</label>
+          <input type="text" class="form-control" name="judulAlternatif" />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Jumlah Episode :</label>
+          <input type="text" class="form-control" name="jumlahEpisode" />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1"
+            >Jumlah Episode Yang Telah Rilis:</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="jumlahEpisodeTelahRilis"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Musim Rilis :</label>
+          <input type="text" class="form-control" name="musimRilis" />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Tanggal Tayang :</label>
+          <input type="text" class="form-control" name="tanggalTayang" />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1"
+            >Studio yang Memproduksi :</label
+          >
+          <input type="text" class="form-control" name="studio" />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Durasi per Episode :</label>
+          <input type="text" class="form-control" name="durasi" />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Skor di MyAnimeList :</label>
+          <input type="text" class="form-control" name="skor" />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Credit :</label>
+          <input type="text" class="form-control" name="credit" />
+        </div>
+        <% genre.forEach(function(item, index){%>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="inlineCheckbox1"
+            value="<%= item.genre %>"
+            name="genre"
+          />
+          <label class="form-check-label" for="inlineCheckbox1"
+            ><%= item.genre %></label
+          >
+        </div>
+        <% }) %>
+
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Sinopsis :</label>
+          <textarea
+            class="form-control"
+            name="sinopsis"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <select class="form-control" name="option">
+            <label for="exampleFormControlTextarea1">Type :</label>
+            <option name="option1" value="ongoing">ONGOING</option>
+            <option name="option2" value="completed">COMPLETED</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="form-control" name="progress">
+            <label for="exampleFormControlTextarea1">Progress :</label>
+            <option name="option1" value="10">10%</option>
+            <option name="option2" value="20">20%</option>
+            <option name="option3" value="30">30%</option>
+            <option name="option4" value="40">40%</option>
+            <option name="option5" value="50">50%</option>
+            <option name="option6" value="60">60%</option>
+            <option name="option7" value="70">70%</option>
+            <option name="option8" value="80">80%</option>
+            <option name="option9" value="90">90%</option>
+            <option name="option10" value="100">100%</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlFile1">Gambar Content</label>
+          <input
+            type="file"
+            class="form-control-file"
+            name="imageContent"
+            id="imageContent"
+          />
+        </div>
+        <textarea id="summernote" name="link"></textarea>
+        <br /><br />
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </form>
+    </div>
+  </div>
+
+  <%- include('partials/admin-footer') %>
+</div>
