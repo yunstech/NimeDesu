@@ -511,8 +511,8 @@ app.post("/edit-content/:postId", function (req, res) {
   if (req.body.option) objForUpdate.type = req.body.option;
   objForUpdate.edited_on = today;
 
-  // //before edit- There is no need for creating a new variable
-  // //var setObj = { $set: objForUpdate }
+  //before edit- There is no need for creating a new variable
+  //var setObj = { $set: objForUpdate }
 
   objForUpdate = { $set: objForUpdate };
   console.log(objForUpdate);
