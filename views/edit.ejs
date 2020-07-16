@@ -10,7 +10,12 @@
     <div class="col-sm-12">
       <!-- Form Upload Content -->
 
-      <form action="/edit-content/<%= info._id %>" method="POST" id="edit">
+      <form
+        action="/edit-content/<%= info._id %>"
+        method="POST"
+        id="edit"
+        enctype="multipart/form-data"
+      >
         <div class="form-group">
           <label for="exampleFormControlInput1">ID :</label>
           <input
@@ -135,6 +140,7 @@
         <div class="form-group">
           <select class="form-control" name="option">
             <label for="exampleFormControlTextarea1">Type :</label>
+            <option disabled selected>False</option>
             <option name="option1" value="ongoing">ONGOING</option>
             <option name="option2" value="completed">COMPLETED</option>
           </select>
@@ -145,6 +151,7 @@
         <div class="form-group">
           <select class="form-control" name="progress">
             <label for="exampleFormControlTextarea1">Progress :</label>
+            <option disabled selected>False</option>
             <option name="option1" value="10">10%</option>
             <option name="option2" value="20">20%</option>
             <option name="option3" value="30">30%</option>
@@ -156,6 +163,15 @@
             <option name="option9" value="90">90%</option>
             <option name="option10" value="100">100%</option>
           </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlFile1">Gambar Content</label>
+          <input
+            type="file"
+            class="form-control-file"
+            name="imageEdit"
+            id="imageEdit"
+          />
         </div>
         <div class="form-group">
           <textarea id="summernote" name="link"><%= info.link %></textarea>

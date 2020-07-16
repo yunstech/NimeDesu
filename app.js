@@ -57,6 +57,13 @@ const upload = multer({
   },
 }).single("imageContent");
 
+const editImage = multer({
+  storage: storage,
+  fileFilter: function (req, file, cb) {
+    checkFileType(file, cb);
+  },
+}).single("imageEdit");
+
 function checkFileType(file, cb) {
   const filetypes = /jpeg|jpg|png|gif/;
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
@@ -485,43 +492,96 @@ app.post("/edit-post", function (req, res) {
 
 app.post("/edit-content/:postId", function (req, res) {
   const requestedPostId = req.params.postId;
-  console.log(req.body.link);
 
-  let objForUpdate = {};
-  let today = new Date();
-  if (req.body.judulContent) objForUpdate.judul = req.body.judulContent;
-  if (req.body.judulAlternatif)
-    objForUpdate.judulAlternatif = req.body.judulAlternatif;
-  if (req.body.jumlahEpisode)
-    objForUpdate.jumlahEpisode = req.body.jumlahEpisode;
-  if (req.body.jumlahEpisodeTelahRilis)
-    objForUpdate.jumlahEpisodeTelahRilis = req.body.jumlahEpisodeTelahRilis;
-  if (req.body.musimRilis)
-    objForUpdate.musimRilis = req.body.jumlahmusimRilispisode;
-  if (req.body.tanggalTayang)
-    objForUpdate.tanggalTayang = req.body.tanggalTayang;
-  if (req.body.studio) objForUpdate.studio = req.body.studio;
-  if (req.body.durasi) objForUpdate.durasi = req.body.durasi;
-  if (req.body.skor) objForUpdate.skor = req.body.skor;
-  if (req.body.credit) objForUpdate.credit = req.body.credit;
-  if (req.body.genre) objForUpdate.genre = req.body.genre;
-  if (req.body.sinopsis) objForUpdate.sinopsis = req.body.sinopsis;
-  if (req.body.link) objForUpdate.link = req.body.link;
-  if (req.body.progress) objForUpdate.progress = req.body.progress;
-  if (req.body.option) objForUpdate.type = req.body.option;
-  objForUpdate.edited_on = today;
-
-  //before edit- There is no need for creating a new variable
-  //var setObj = { $set: objForUpdate }
-
-  objForUpdate = { $set: objForUpdate };
-  console.log(objForUpdate);
-
-  AnimeInfo.updateOne({ _id: requestedPostId }, objForUpdate, function (err) {
+  editImage(req, res, (err) => {
     if (err) {
+      res.render("404");
       console.log(err);
     } else {
-      res.redirect("/admin021224");
+      if (req.file == undefined) {
+        let objForUpdate = {};
+        let today = new Date();
+        if (req.body.judulContent) objForUpdate.judul = req.body.judulContent;
+        if (req.body.judulAlternatif)
+          objForUpdate.judulAlternatif = req.body.judulAlternatif;
+        if (req.body.jumlahEpisode)
+          objForUpdate.jumlahEpisode = req.body.jumlahEpisode;
+        if (req.body.jumlahEpisodeTelahRilis)
+          objForUpdate.jumlahEpisodeTelahRilis =
+            req.body.jumlahEpisodeTelahRilis;
+        if (req.body.musimRilis)
+          objForUpdate.musimRilis = req.body.jumlahmusimRilispisode;
+        if (req.body.tanggalTayang)
+          objForUpdate.tanggalTayang = req.body.tanggalTayang;
+        if (req.body.studio) objForUpdate.studio = req.body.studio;
+        if (req.body.durasi) objForUpdate.durasi = req.body.durasi;
+        if (req.body.skor) objForUpdate.skor = req.body.skor;
+        if (req.body.credit) objForUpdate.credit = req.body.credit;
+        if (req.body.genre) objForUpdate.genre = req.body.genre;
+        if (req.body.sinopsis) objForUpdate.sinopsis = req.body.sinopsis;
+        if (req.body.link) objForUpdate.link = req.body.link;
+        if (req.body.progress) objForUpdate.progress = req.body.progress;
+        if (req.body.option) objForUpdate.type = req.body.option;
+        objForUpdate.edited_on = today;
+
+        //before edit- There is no need for creating a new variable
+        //var setObj = { $set: objForUpdate }
+
+        objForUpdate = { $set: objForUpdate };
+        console.log(objForUpdate);
+
+        AnimeInfo.updateOne({ _id: requestedPostId }, objForUpdate, function (
+          err
+        ) {
+          if (err) {
+            console.log(err);
+          } else {
+            res.redirect("/admin021224");
+          }
+        });
+      } else {
+        let objForUpdate = {};
+        let today = new Date();
+        if (req.body.judulContent) objForUpdate.judul = req.body.judulContent;
+        if (req.body.judulAlternatif)
+          objForUpdate.judulAlternatif = req.body.judulAlternatif;
+        if (req.body.jumlahEpisode)
+          objForUpdate.jumlahEpisode = req.body.jumlahEpisode;
+        if (req.body.jumlahEpisodeTelahRilis)
+          objForUpdate.jumlahEpisodeTelahRilis =
+            req.body.jumlahEpisodeTelahRilis;
+        if (req.body.musimRilis)
+          objForUpdate.musimRilis = req.body.jumlahmusimRilispisode;
+        if (req.body.tanggalTayang)
+          objForUpdate.tanggalTayang = req.body.tanggalTayang;
+        if (req.body.studio) objForUpdate.studio = req.body.studio;
+        if (req.body.durasi) objForUpdate.durasi = req.body.durasi;
+        if (req.body.skor) objForUpdate.skor = req.body.skor;
+        if (req.body.credit) objForUpdate.credit = req.body.credit;
+        if (req.body.genre) objForUpdate.genre = req.body.genre;
+        if (req.body.sinopsis) objForUpdate.sinopsis = req.body.sinopsis;
+        if (req.body.link) objForUpdate.link = req.body.link;
+        if (req.body.progress) objForUpdate.progress = req.body.progress;
+        if (req.body.option) objForUpdate.type = req.body.option;
+        if (req.file) objForUpdate.img = req.file.filename;
+        objForUpdate.edited_on = today;
+
+        //before edit- There is no need for creating a new variable
+        //var setObj = { $set: objForUpdate }
+
+        objForUpdate = { $set: objForUpdate };
+        console.log(objForUpdate);
+
+        AnimeInfo.updateOne({ _id: requestedPostId }, objForUpdate, function (
+          err
+        ) {
+          if (err) {
+            console.log(err);
+          } else {
+            res.redirect("/admin021224");
+          }
+        });
+      }
     }
   });
 });
