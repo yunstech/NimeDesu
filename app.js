@@ -196,7 +196,6 @@ app.get("/daftar-anime", function (req, res) {
 
 app.get("/anime", function (req, res) {
   AnimeInfo.findOne({ judul: "Manaria Friends BD" }, function (err, info) {
-    console.log(info.link);
     if (err) {
       res.redirect("/404");
     } else {
@@ -322,7 +321,6 @@ app.get("/edit/:postId", function (req, res) {
     const requestedPostId = req.params.postId;
 
     AnimeInfo.findOne({ _id: requestedPostId }, function (err, post) {
-      console.log(post);
       if (err) {
         res.render("404");
       } else {
@@ -350,7 +348,11 @@ app.get("/search", function (req, res) {
       if (err) {
         console.log(err);
       } else {
-        res.render("search", { post: found, truncateString: truncateString });
+        res.render("search", {
+          post: found,
+          truncateString: truncateString,
+          search: req.query.search,
+        });
       }
     });
   }
@@ -388,12 +390,15 @@ app.get("/search/:postId", function (req, res) {
   const requestedPostId = req.params.postId;
 
   Genre.findOne({ _id: requestedPostId }, function (err, found) {
-    console.log(found);
     AnimeInfo.find({ genre: found.genre }, function (err, result) {
       if (err) {
         console.log(err);
       } else {
-        res.render("search", { post: result, truncateString: truncateString });
+        res.render("search", {
+          post: result,
+          truncateString: truncateString,
+          search: found.genre,
+        });
       }
     });
   });
@@ -528,7 +533,6 @@ app.post("/edit-content/:postId", function (req, res) {
         //var setObj = { $set: objForUpdate }
 
         objForUpdate = { $set: objForUpdate };
-        console.log(objForUpdate);
 
         AnimeInfo.updateOne({ _id: requestedPostId }, objForUpdate, function (
           err
@@ -570,7 +574,6 @@ app.post("/edit-content/:postId", function (req, res) {
         //var setObj = { $set: objForUpdate }
 
         objForUpdate = { $set: objForUpdate };
-        console.log(objForUpdate);
 
         AnimeInfo.updateOne({ _id: requestedPostId }, objForUpdate, function (
           err

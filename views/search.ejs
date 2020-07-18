@@ -1,43 +1,31 @@
 <%- include('partials/header') %>
-    
+
 <div class="container">
-    <div class="row">
-      <div class="completed-title">
-        <h4 class="completed">Search for : <%= post.search %></h4>
-        <hr class="hr">
-      </div>
-    </div>
-    <div class="row">
-      
-      <% post.forEach(function(item, index) { %>
-        <%if(index < 6){ %>
-          <div class="col-sm-4">
-            <div class="card thumbnail-card">
-              <a href="/anime/<%= item._id %>"
-                ><img
-                  src="upload/<%= item.img %>"
-                  class="card-img-top"
-                  alt="..."
-              /></a>
-              <div class="card-body">
-                <h5 class="card-title"><%= item.judul %></h5>
-                <p class="card-text"><%= truncateString(item.sinopsis, 100) %></p>
-              </div>
-              <div class="eps">
-                <p>⭐ <%= item.skor %></p>
-              </div>
-              <h2 class="judul-anime"><%= item.judul %></h2>
-            </div>
-          </div>
-       <% }else{ %>
-        <%   return null; %>
-      
-      <%  } %>
-      
-        
-     <% }) %>
-      
+  <div class="row">
+    <div class="completed-title">
+      <h4 class="completed">Search for : <%= search %></h4>
+      <hr class="hr" />
     </div>
   </div>
+  <div class="row">
+    <% post.forEach(function(item, index) { %> <%if(index < 6){ %>
+    <div class="col-sm-4">
+      <div class="card thumbnail-card">
+        <a href="/anime/<%= item._id %>"
+          ><img src="upload/<%= item.img %>" class="card-img-top" alt="..."
+        /></a>
+        <div class="card-body">
+          <h5 class="card-title"><%= item.judul %></h5>
+          <p class="card-text"><%= truncateString(item.sinopsis, 100) %></p>
+        </div>
+        <div class="eps">
+          <p>⭐ <%= item.skor %></p>
+        </div>
+        <h2 class="judul-anime"><%= item.judul %></h2>
+      </div>
+    </div>
+    <% }else{ %> <% return null; %> <% } %> <% }) %>
+  </div>
+</div>
 
-      <%- include('partials/footer') %>
+<%- include('partials/footer') %>
