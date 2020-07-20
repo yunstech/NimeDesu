@@ -115,6 +115,7 @@ const animeInfoSchema = new mongoose.Schema(
     progress: String,
     created_on: String,
     edited_on: String,
+    hariRilis: String,
     sanitizeHtml: String,
   },
   { typeKey: "$type" }
@@ -270,6 +271,21 @@ app.get("/register", function (req, res) {
     res.redirect("/admin021224");
   }
 });
+
+app.get('/jadwal-rilis', function (req, res) {
+  AnimeInfo.find({ type: "ongoing" }, function (err, result) {
+    if (err) {
+      console.log(err);
+      res.render('404')
+    } else {
+      res.render('jadwalRilis', {
+        post: result,
+        truncateString: truncateString,
+      })
+    }
+  })
+
+})
 
 app.get("/404", function (req, res) {
   res.render("404");
@@ -454,6 +470,7 @@ app.post("/upload-content", function (req, res) {
           progress: req.body.progress,
           created_on: today,
           edited_on: today,
+          hariRilis: req.body.hariRilis
         });
 
         newAnimeInfo.save(function (err) {
@@ -527,6 +544,7 @@ app.post("/edit-content/:postId", function (req, res) {
         if (req.body.link) objForUpdate.link = req.body.link;
         if (req.body.progress) objForUpdate.progress = req.body.progress;
         if (req.body.option) objForUpdate.type = req.body.option;
+        if (req.body.hariRilis) objForUpdate.hariRilis = req.body.hariRilis;
         objForUpdate.edited_on = today;
 
         //before edit- There is no need for creating a new variable
@@ -568,6 +586,7 @@ app.post("/edit-content/:postId", function (req, res) {
         if (req.body.progress) objForUpdate.progress = req.body.progress;
         if (req.body.option) objForUpdate.type = req.body.option;
         if (req.file) objForUpdate.img = req.file.filename;
+        if (req.body.hariRilis) objForUpdate.hariRilis = req.body.hariRilis;
         objForUpdate.edited_on = today;
 
         //before edit- There is no need for creating a new variable
