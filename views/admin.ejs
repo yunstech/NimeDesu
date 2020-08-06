@@ -1,24 +1,38 @@
 <%- include('partials/admin-header') %>
 <div class="container">
+
+
   <div class="row">
+    <div class="col-sm-12">
+      <div class="type-title">
+        <h2>COMPLETED</h2>
+        <div class="button-title">
+          <a href="#" class="btn btn-danger">See More!</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row home-content">
     <% post.reverse() %> <% post.forEach(function(item, index) { %>
-    <div class="col-sm-4 card-admin">
+    <div class="col-lg-4 card-content">
       <div class="card" style="width: 18rem;">
-        <img
-          src="upload/<%= item.img %>"
-          class="card-img-top"
-          alt="<%= item.judul %>"
-        />
+        <a href="/anime/<%= item._id %>"><img src="upload/<%= item.img %>" class="card-img-top" alt="Apa hayo"></a>
+        <p class="item">⭐ <%= item.skor %></p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><%= truncateString(item.judul, 30) %></li>
+        </ul>
         <div class="card-body">
-          <h5 class="card-title"><%= item.judul %></h5>
-          <p class="card-text"><%= truncateString(item.sinopsis, 80) %></p>
+          <p class="card-text">Genre: <%= item.genre.splice(0,3) %>...</p>
+          <p class="card-text"><%= truncateString(item.sinopsis, 100) %></p>
           <a href="/edit/<%= item._id %>" class="btn btn-primary">Edit</a>
           <a href="/delete/<%= item._id %>" class="btn btn-danger">Delete</a>
         </div>
       </div>
     </div>
     <% }) %>
+
   </div>
+
 </div>
 
 <%- include('partials/admin-footer') %>
