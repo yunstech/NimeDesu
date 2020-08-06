@@ -68,7 +68,7 @@
             <li class="list-group-item"><%= truncateString(item.judul, 30) %></li>
           </ul>
           <div class="card-body">
-            <p class="card-text">Genre : Hentai</p>
+            <p class="card-text">Genre : <%= truncateString(item.genre, 20) %></p>
             <p class="card-text"><%= truncateString(item.sinopsis, 100) %></p>
           </div>
         </div>
@@ -108,7 +108,7 @@
             <li class="list-group-item"><%= truncateString(item.judul, 30) %></li>
           </ul>
           <div class="card-body">
-            <p class="card-text">Genre: hentai</p>
+            <p class="card-text">Genre: <%= truncateString(item.genre, 20) %></p>
             <p class="card-text"><%= truncateString(item.sinopsis, 100) %></p>
           </div>
         </div>
