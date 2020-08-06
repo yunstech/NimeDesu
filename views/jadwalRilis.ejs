@@ -1,165 +1,131 @@
-<%- include('partials/header') %>
+<%- include('partials/header2') %>
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-8 col-jadwal">
-      <div class="jadwalRilis">
 
-          <div class="senin">
-              <h2 class="title">Senin</h2>
-              <div class="row item-row">
-                  <% post.forEach(function(item, index){ %>
-                    <% if(item.hariRilis === 'Senin' || item.hariRilis === 'senin'){ %>
 
-                        <div class="col-sm-4 item">
-                            <p class="item-title"><div class="rotated">></div> <a href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></p>
-                        </div>
 
-                    <% } %>
-                    
-                  <% }) %>
 
-              </div>
-          </div>
-          <div class="senin">
-              <h2 class="title">Selasa</h2>
-              <div class="row item-row">
-                <% post.forEach(function(item, index){ %>
-                    <% if(item.hariRilis === 'Selasa' || item.hariRilis === 'selasa'){ %>
 
-                        <div class="col-sm-4 item">
-                            <p class="item-title"><div class="rotated">></div> <a href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></p>
-                        </div>
+<section id="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 jadwalrilis">
+                <div class="hari">
+                    <p class="title-hari">SENIN</p>
+                    <div class="content-jadwalrilis">
+                        <ul>
+                            <% post.forEach(function(item, index){ %>
+                            <% if(item.hariRilis === 'Senin' || item.hariRilis === 'senin'){ %>
+                            <li class="item-jadwalrilis"><span>> </span> <a
+                                    href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
+                            <% } %>
 
-                    <% } %>
-                    
-                  <% }) %>
-                  
-              </div>
-          </div>
-          <div class="senin">
-              <h2 class="title">Rabu</h2>
-              <div class="row item-row">
-                <% post.forEach(function(item, index){ %>
-                    <% if(item.hariRilis === 'Rabu' || item.hariRilis === 'rabu'){ %>
+                            <% }) %>
+                        </ul>
+                    </div>
+                </div>
+                <div class="hari">
+                    <p class="title-hari">SELASA</p>
+                    <div class="content-jadwalrilis">
+                        <ul>
+                            <% post.forEach(function(item, index){ %>
+                            <% if(item.hariRilis === 'Selasa' || item.hariRilis === 'selasa'){ %>
 
-                        <div class="col-sm-4 item">
-                            <p class="item-title"><div class="rotated">></div> <a href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></p>
-                        </div>
+                            <li class="item-jadwalrilis"><span>> </span> <a
+                                    href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
+                            <% } %>
 
-                    <% } %>
-                    
-                  <% }) %>
-                  
-              </div>
-          </div>
-          <div class="senin">
-              <h2 class="title">Kamis</h2>
-              <div class="row item-row">
-                <% post.forEach(function(item, index){ %>
-                    <% if(item.hariRilis === 'Kamis' || item.hariRilis === 'kamis'){ %>
+                            <% }) %>
 
-                        <div class="col-sm-4 item">
-                            <p class="item-title"><div class="rotated">></div> <a href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></p>
-                        </div>
+                        </ul>
+                    </div>
+                </div>
+                <div class="hari">
+                    <p class="title-hari">RABU</p>
+                    <div class="content-jadwalrilis">
+                        <ul>
+                            <% post.forEach(function(item, index){ %>
+                            <% if(item.hariRilis === 'Rabu' || item.hariRilis === 'rabu'){ %>
 
-                    <% } %>
-                    
-                  <% }) %>
-                  
-              </div>
-          </div>
-          <div class="senin">
-              <h2 class="title">Jumat</h2>
-              <div class="row item-row">
-                <% post.forEach(function(item, index){ %>
-                    <% if(item.hariRilis === 'Jumat' || item.hariRilis === 'jumat'){ %>
+                            <li class="item-jadwalrilis"><span>> </span> <a
+                                    href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
+                            <% } %>
 
-                        <div class="col-sm-4 item">
-                            <p class="item-title"><div class="rotated">></div> <a href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></p>
-                        </div>
+                            <% }) %>
 
-                    <% } %>
-                    
-                  <% }) %>
-                  
-              </div>
-          </div>
-          <div class="senin">
-              <h2 class="title">Sabtu</h2>
-              <div class="row item-row">
-                <% post.forEach(function(item, index){ %>
-                    <% if(item.hariRilis === 'Sabtu' || item.hariRilis === 'sabtu'){ %>
+                        </ul>
+                    </div>
+                </div>
+                <div class="hari">
+                    <p class="title-hari">KAMIS</p>
+                    <div class="content-jadwalrilis">
+                        <ul>
+                            <% post.forEach(function(item, index){ %>
+                            <% if(item.hariRilis === 'Kamis' || item.hariRilis === 'kamis'){ %>
 
-                        <div class="col-sm-4 item">
-                            <p class="item-title"><div class="rotated">></div> <a href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></p>
-                        </div>
+                            <li class="item-jadwalrilis"><span>> </span> <a
+                                    href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
+                            <% } %>
 
-                    <% } %>
-                    
-                  <% }) %>
-                  
-              </div>
-          </div>
-          <div class="senin">
-              <h2 class="title">Minggu</h2>
-              <div class="row item-row">
-                <% post.forEach(function(item, index){ %>
-                    <% if(item.hariRilis === 'Minggu' || item.hariRilis === 'minggu'){ %>
+                            <% }) %>
 
-                        <div class="col-sm-4 item">
-                            <p class="item-title"><div class="rotated">></div> <a href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></p>
-                        </div>
+                        </ul>
+                    </div>
+                </div>
+                <div class="hari">
+                    <p class="title-hari">JUMAT</p>
+                    <div class="content-jadwalrilis">
+                        <ul>
+                            <% post.forEach(function(item, index){ %>
+                            <% if(item.hariRilis === 'Jumat' || item.hariRilis === 'jumat'){ %>
+                            <li class="item-jadwalrilis"><span>> </span> <a
+                                    href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
+                            <% } %>
 
-                    <% } %>
-                    
-                  <% }) %>
-                  
-              </div>
-          </div>
+                            <% }) %>
+                        </ul>
+                    </div>
+                </div>
+                <div class="hari">
+                    <p class="title-hari">SABTU</p>
+                    <div class="content-jadwalrilis">
+                        <ul>
+                            <% post.forEach(function(item, index){ %>
+                            <% if(item.hariRilis === 'Sabtu' || item.hariRilis === 'sabtu'){ %>
 
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div
-        class="toast-anime sticky-top"
-        role="alert"
-        aria-live="assertive"
-        aria-atomic="true"
-      >
-        <div class="toast-header">
-          <img
-            src="../img/nimedesu.jpg"
-            class="toast-img"
-            alt="NimeDesu Image"
-          />
-          <strong class="mr-auto">NimeDesu</strong>
-          <small>2020</small>
+                            <li class="item-jadwalrilis"><span>> </span> <a
+                                    href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
+                            <% } %>
+
+                            <% }) %>
+                        </ul>
+                    </div>
+                </div>
+                <div class="hari">
+                    <p class="title-hari">MINGGU</p>
+                    <div class="content-jadwalrilis">
+                        <ul>
+                            <% post.forEach(function(item, index){ %>
+                            <% if(item.hariRilis === 'Minggu' || item.hariRilis === 'minggu'){ %>
+
+                            <li class="item-jadwalrilis"><span>> </span> <a
+                                    href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
+                            <% } %>
+
+                            <% }) %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <%- include('partials/toast') %>
         </div>
-        <div class="toast-body">
-          Thanks for visiting this website hope you enjoyed and dont forget to
-          follow on social media :
-          <ul class="list-group">
-            <li class="list-group-item">
-              <a href="https://www.instagram.com/yunstech"
-                ><i class="fab fa-instagram"></i> Instagram</a
-              >
-            </li>
-            <li class="list-group-item">
-              <a href="https://www.twitter.com/yunstech"
-                ><i class="fab fa-twitter"></i> Twitter</a
-              >
-            </li>
-            <li class="list-group-item">
-              <a href="https://www.youtube.com/channel/UCERKaZ4cFgYO69rz8SgjC4g"
-                ><i class="fab fa-youtube"></i> Youtube</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
-  </div>
-</div>
+</section>
+
+
+
+
+
+
+
 
 <%- include('partials/footer') %>

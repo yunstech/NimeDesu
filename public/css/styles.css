@@ -2,11 +2,29 @@ body {
   font-family: sans-serif;
 }
 
-.carousel-item {
-  height: 600px;
+.carousel-item ,
+.carousel-item img  {
+  height: 500px;
 }
-.carousel-item img {
-  height: 600px;
+
+ .ongoing-background,  
+ .completed-background{
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0px 1px 35px 0px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  
+}
+
+.completed-background{
+  margin-bottom: 200px;
+}
+
+.ongoing-background .btn, 
+.completed-background .btn{
+  width: 200px;
 }
 
 .carousel-item .carousel-caption {
@@ -93,8 +111,30 @@ body {
   color: white;
   text-align: center;
   line-height: 100px;
-  margin-bottom: 0;
+  margin: 0;
 }
+
+.footer p{
+  margin: 0;
+  display: inline;
+}
+.footer .custom-switch{
+  display: inline-block;
+}
+
+
+
+body {
+  --text-color: #222;
+  --bkg-color: #fff;
+}
+body.dark-theme {
+  --text-color: #eee;
+  --bkg-color: #121212;
+}
+
+
+
 
 .anime-image {
   margin: 100px auto 30px;
@@ -241,10 +281,8 @@ body {
 
 .card-daftar-anime {
   display: none;
-  position: sticky;
   background: white;
-  transition: 0.5s linear;
-  z-index: 99999;
+  transition: 0.5s;
   border-radius: 5px;
   padding: 20px;
 }
@@ -252,7 +290,7 @@ body {
 .card-anime:hover .card-daftar-anime {
   display: inline-block;
   box-shadow: 0px 1px 35px 0px rgba(0, 0, 0, 0.4);
-  width: 500px;
+  width: 300px;
   position: absolute;
 }
 
@@ -298,4 +336,26 @@ body {
   box-shadow: 3px 3px 4px 5px rgba(0, 0, 0, 0.8);
   border-radius: 10px;
   margin: 100px 0 ;
+}
+
+.col-jadwal a {
+  text-decoration: none;
+  color: black;
+}
+
+
+.index{
+  display: inline-block;
+  margin: auto;
+  text-align: center;
+}
+
+.dark{
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+
+.pagination {
+  text-align: center;
+  display: inline-block;
 }

@@ -1,11 +1,31 @@
 
-function cek_jumlah() {
-    const objTo = document.getElementById('verifikasi')
-    const divtest = document.createElement("div");
-    divtest.innerHTML = `<div class="form-group"><label for="exampleFormControlInput1">Credit :</label><input type="text" class="form-control" name="jumlahInput" value="${ input }"></div>`;
+// const dark = document.getElementById('customSwitch1');
 
-    objTo.appendChild(divtest)
+// dark.addEventListener('click', function () {
+//     const body = document.getElementById('body');
+//     const list = document.querySelectorAll(".list-group-item");
+
+//     list.forEach(function (item, index) {
+
+//         item.classList.toggle('list-group-item-dark')
+//     })
+
+//     body.classList.toggle('dark')
+// })
+
+const btn = document.getElementById('customSwitch1');
+const body = document.getElementById('body');
+const currentTheme = localStorage.getItem("theme");
+if (currentTheme == "dark") {
+    body.classList.add("dark-theme");
 }
 
+btn.addEventListener("click", function () {
+    body.classList.toggle("dark");
 
-const edit = document.getElementById('edit');
+    let theme = "light";
+    if (body.classList.contains("dark")) {
+        theme = "dark";
+    }
+    localStorage.setItem("theme", theme);
+})

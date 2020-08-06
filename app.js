@@ -4,8 +4,12 @@ const mongoose = require("mongoose");
 const path = require("path");
 const multer = require("multer");
 const _ = require("lodash");
-const { get } = require("lodash");
-const { JSDOM } = require("jsdom");
+const {
+  get
+} = require("lodash");
+const {
+  JSDOM
+} = require("jsdom");
 const marked = require("marked");
 const createDomPurifier = require("dompurify");
 const dompurify = createDomPurifier(new JSDOM().window);
@@ -17,8 +21,14 @@ const mongoose_fuzzy_searching = require("mongoose-fuzzy-searching");
 const app = express();
 
 app.set("view engine", "ejs");
-app.use(bodyParser.json({ limit: "50mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(bodyParser.json({
+  limit: "50mb",
+  extended: true
+}));
+app.use(bodyParser.urlencoded({
+  limit: "50mb",
+  extended: true
+}));
 app.use(express.static("public"));
 app.use(
   session({
@@ -32,8 +42,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 mongoose.connect(
-  "mongodb+srv://yunstech:085862525407@nimedesu.drpdp.mongodb.net/NimeDesuDB?retryWrites=true&w=majority",
-  {
+  "mongodb+srv://yunstech:085862525407@nimedesu.drpdp.mongodb.net/NimeDesuDB?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   }
@@ -95,35 +104,35 @@ const genreSchema = new mongoose.Schema({
 
 const Genre = mongoose.model("Genre", genreSchema);
 
-const animeInfoSchema = new mongoose.Schema(
-  {
-    judul: String,
-    judulAlternatif: String,
-    jumlahEpisode: String,
-    jumlahEpisodeTelahRilis: String,
-    musimRilis: String,
-    tanggalTayang: String,
-    studio: String,
-    durasi: String,
-    skor: String,
-    credit: String,
-    genre: Array,
-    sinopsis: String,
-    link: String,
-    type: String,
-    img: String,
-    progress: String,
-    created_on: String,
-    edited_on: String,
-    hariRilis: String,
-    sanitizeHtml: String,
-  },
-  { typeKey: "$type" }
-);
+const animeInfoSchema = new mongoose.Schema({
+  judul: String,
+  judulAlternatif: String,
+  jumlahEpisode: String,
+  jumlahEpisodeTelahRilis: String,
+  musimRilis: String,
+  tanggalTayang: String,
+  studio: String,
+  durasi: String,
+  skor: String,
+  credit: String,
+  genre: Array,
+  sinopsis: String,
+  link: String,
+  type: String,
+  img: String,
+  progress: String,
+  created_on: Date,
+  edited_on: Date,
+  hariRilis: String,
+  sanitizeHtml: String,
+}, {
+  typeKey: "$type"
+});
 animeInfoSchema.plugin(mongoose_fuzzy_searching, {
   fields: ["judul", "judulAlternatif"],
 });
 const AnimeInfo = mongoose.model("AnimeInfo", animeInfoSchema);
+
 function truncateString(str, num) {
   if (str.length <= num) {
     return str;
@@ -135,6 +144,13 @@ const postSchema = new mongoose.Schema({
   faq: String,
 });
 
+var dateObj = new Date();
+var month = dateObj.getUTCMonth() + 1; //months from 1-12
+var day = dateObj.getUTCDate();
+var year = dateObj.getUTCFullYear();
+
+const newdate = year + "/" + month + "/" + day;
+
 const PostSchema = mongoose.model("PostSchema", postSchema);
 
 animeInfoSchema.pre("validate", function (next) {
@@ -142,6 +158,7 @@ animeInfoSchema.pre("validate", function (next) {
     this.sanitizeHtml = dompurify.sanitize(marked(this.link));
   }
 });
+
 function escapeRegex(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
@@ -161,17 +178,23 @@ let stringToHTML = function (str) {
 };
 
 app.get("/", function (req, res) {
-  AnimeInfo.find({ type: "completed" }).exec(function (err, completed) {
+  AnimeInfo.find({
+    type: "completed"
+  }).exec(function (err, completed) {
     if (err) {
       res.render("404");
     } else {
-      AnimeInfo.find({ type: "ongoing" }).exec(function (err, ongoing) {
+      AnimeInfo.find({
+        type: "ongoing"
+      }).sort({
+        date: 'desc'
+      }).exec(function (err, docs) {
         if (err) {
           res.render("404");
         } else {
           res.render("index", {
             completed: completed,
-            ongoing: ongoing,
+            ongoing: docs,
             truncateString: truncateString,
           });
         }
@@ -196,7 +219,9 @@ app.get("/daftar-anime", function (req, res) {
 });
 
 app.get("/anime", function (req, res) {
-  AnimeInfo.findOne({ judul: "Manaria Friends BD" }, function (err, info) {
+  AnimeInfo.findOne({
+    judul: "Manaria Friends BD"
+  }, function (err, info) {
     if (err) {
       res.redirect("/404");
     } else {
@@ -211,7 +236,9 @@ app.get("/anime/:postId", function (req, res) {
   const requestedPostId = req.params.postId;
   const today = new Date();
 
-  AnimeInfo.findOne({ _id: requestedPostId }, function (err, post) {
+  AnimeInfo.findOne({
+    _id: requestedPostId
+  }, function (err, post) {
     if (err) {
       res.render("404");
     } else {
@@ -273,7 +300,9 @@ app.get("/register", function (req, res) {
 });
 
 app.get('/jadwal-rilis', function (req, res) {
-  AnimeInfo.find({ type: "ongoing" }, function (err, result) {
+  AnimeInfo.find({
+    type: "ongoing"
+  }, function (err, result) {
     if (err) {
       console.log(err);
       res.render('404')
@@ -336,7 +365,9 @@ app.get("/edit/:postId", function (req, res) {
   if (req.isAuthenticated()) {
     const requestedPostId = req.params.postId;
 
-    AnimeInfo.findOne({ _id: requestedPostId }, function (err, post) {
+    AnimeInfo.findOne({
+      _id: requestedPostId
+    }, function (err, post) {
       if (err) {
         res.render("404");
       } else {
@@ -360,7 +391,9 @@ app.get("/edit/:postId", function (req, res) {
 app.get("/search", function (req, res) {
   if (req.query.search) {
     const regex = new RegExp(escapeRegex(req.query.search), "gi");
-    AnimeInfo.find({ judul: regex }, function (err, found) {
+    AnimeInfo.find({
+      judul: regex
+    }, function (err, found) {
       if (err) {
         console.log(err);
       } else {
@@ -393,7 +426,9 @@ app.get("/faq", function (req, res) {
 app.get("/delete/:postId", function (req, res) {
   const requestedPostId = req.params.postId;
 
-  AnimeInfo.deleteOne({ _id: requestedPostId }, function (err) {
+  AnimeInfo.deleteOne({
+    _id: requestedPostId
+  }, function (err) {
     if (err) {
       console.log(err);
     } else {
@@ -405,8 +440,12 @@ app.get("/delete/:postId", function (req, res) {
 app.get("/search/:postId", function (req, res) {
   const requestedPostId = req.params.postId;
 
-  Genre.findOne({ _id: requestedPostId }, function (err, found) {
-    AnimeInfo.find({ genre: found.genre }, function (err, result) {
+  Genre.findOne({
+    _id: requestedPostId
+  }, function (err, found) {
+    AnimeInfo.find({
+      genre: found.genre
+    }, function (err, result) {
       if (err) {
         console.log(err);
       } else {
@@ -467,9 +506,9 @@ app.post("/upload-content", function (req, res) {
           link: req.body.link,
           type: req.body.option,
           img: req.file.filename,
+          created_on: newdate,
+          edited_on: newdate,
           progress: req.body.progress,
-          created_on: today,
-          edited_on: today,
           hariRilis: req.body.hariRilis
         });
 
@@ -522,7 +561,6 @@ app.post("/edit-content/:postId", function (req, res) {
     } else {
       if (req.file == undefined) {
         let objForUpdate = {};
-        let today = new Date();
         if (req.body.judulContent) objForUpdate.judul = req.body.judulContent;
         if (req.body.judulAlternatif)
           objForUpdate.judulAlternatif = req.body.judulAlternatif;
@@ -530,7 +568,7 @@ app.post("/edit-content/:postId", function (req, res) {
           objForUpdate.jumlahEpisode = req.body.jumlahEpisode;
         if (req.body.jumlahEpisodeTelahRilis)
           objForUpdate.jumlahEpisodeTelahRilis =
-            req.body.jumlahEpisodeTelahRilis;
+          req.body.jumlahEpisodeTelahRilis;
         if (req.body.musimRilis)
           objForUpdate.musimRilis = req.body.jumlahmusimRilispisode;
         if (req.body.tanggalTayang)
@@ -545,14 +583,18 @@ app.post("/edit-content/:postId", function (req, res) {
         if (req.body.progress) objForUpdate.progress = req.body.progress;
         if (req.body.option) objForUpdate.type = req.body.option;
         if (req.body.hariRilis) objForUpdate.hariRilis = req.body.hariRilis;
-        objForUpdate.edited_on = today;
+        objForUpdate.edited_on = newdate;
 
         //before edit- There is no need for creating a new variable
         //var setObj = { $set: objForUpdate }
 
-        objForUpdate = { $set: objForUpdate };
+        objForUpdate = {
+          $set: objForUpdate
+        };
 
-        AnimeInfo.updateOne({ _id: requestedPostId }, objForUpdate, function (
+        AnimeInfo.updateOne({
+          _id: requestedPostId
+        }, objForUpdate, function (
           err
         ) {
           if (err) {
@@ -563,7 +605,6 @@ app.post("/edit-content/:postId", function (req, res) {
         });
       } else {
         let objForUpdate = {};
-        let today = new Date();
         if (req.body.judulContent) objForUpdate.judul = req.body.judulContent;
         if (req.body.judulAlternatif)
           objForUpdate.judulAlternatif = req.body.judulAlternatif;
@@ -571,7 +612,7 @@ app.post("/edit-content/:postId", function (req, res) {
           objForUpdate.jumlahEpisode = req.body.jumlahEpisode;
         if (req.body.jumlahEpisodeTelahRilis)
           objForUpdate.jumlahEpisodeTelahRilis =
-            req.body.jumlahEpisodeTelahRilis;
+          req.body.jumlahEpisodeTelahRilis;
         if (req.body.musimRilis)
           objForUpdate.musimRilis = req.body.jumlahmusimRilispisode;
         if (req.body.tanggalTayang)
@@ -587,14 +628,18 @@ app.post("/edit-content/:postId", function (req, res) {
         if (req.body.option) objForUpdate.type = req.body.option;
         if (req.file) objForUpdate.img = req.file.filename;
         if (req.body.hariRilis) objForUpdate.hariRilis = req.body.hariRilis;
-        objForUpdate.edited_on = today;
+        objForUpdate.edited_on = newdate;
 
         //before edit- There is no need for creating a new variable
         //var setObj = { $set: objForUpdate }
 
-        objForUpdate = { $set: objForUpdate };
+        objForUpdate = {
+          $set: objForUpdate
+        };
 
-        AnimeInfo.updateOne({ _id: requestedPostId }, objForUpdate, function (
+        AnimeInfo.updateOne({
+          _id: requestedPostId
+        }, objForUpdate, function (
           err
         ) {
           if (err) {
@@ -609,8 +654,9 @@ app.post("/edit-content/:postId", function (req, res) {
 });
 
 app.post("/register", function (req, res) {
-  Admin.register(
-    { username: req.body.adminEmail },
+  Admin.register({
+      username: req.body.adminEmail
+    },
     req.body.adminPassword,
     function (err, user) {
       if (err) {
