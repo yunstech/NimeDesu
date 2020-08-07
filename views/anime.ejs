@@ -7,16 +7,16 @@
     <div class="col-sm-8">
       <img class="img-fluid anime-image" src="../upload/<%= info.img %>" alt="<%= info.judul %>">
 
-     <span>Uploaded By : <a href="https://www.instagram.com/yunstech">@Yunstech</a> With ❤</span>
-     <br>
-     <br>
-     <span>Upload Date : <%= info.created_on %></span>
-     <br>
-     <br>
-     <span>Fix Date : <%= info.edited_on %></span>
-     <br><br>
-      
-      
+      <span>Uploaded By : <a href="https://www.instagram.com/yunstech">@Yunstech</a> With ❤</span>
+      <br>
+      <br>
+      <span>Upload Date : <%= info.created_on %></span>
+      <br>
+      <br>
+      <span>Fix Date : <%= info.edited_on %></span>
+      <br><br>
+
+
 
       <div class="info-anime mt-20">
         <ul class="list-group">
@@ -28,10 +28,10 @@
           <li class="list-group-item info-anime-item">Studio yang Memproduksi : <%= info.studio %></li>
           <li class="list-group-item info-anime-item">Durasi per Episode : <%= info.durasi %></li>
           <li class="list-group-item info-anime-item">Genre : <%= info.genre %></li>
-          <li class="list-group-item info-anime-item">Skor di MyAnimeList :  <%= info.skor %> </li>
+          <li class="list-group-item info-anime-item">Skor di MyAnimeList : <%= info.skor %> </li>
           <li class="list-group-item info-anime-item">Credit : <%= info.credit %></li>
         </ul>
-        
+
       </div>
 
       <div class="sinopsis alert-success">
@@ -41,20 +41,38 @@
         </div>
       </div>
       <div class="link-download">
-        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
           <%= info.judul %> Download Link
-        </a>
-        <div class="collapse" id="collapseExample">
-          <div class="card card-body">
-            <div id="linkB" name="linkB"><%- info.link %></div>
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel"><%= info.judul %> Download Link</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <%- info.link %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
           </div>
         </div>
+
       </div>
-      
+
 
     </div>
     <%- include('partials/toast') %>
   </div>
-  
+
 </div>
 <%- include('partials/footer') %>

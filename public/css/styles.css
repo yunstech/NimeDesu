@@ -2,28 +2,28 @@ body {
   font-family: sans-serif;
 }
 
-.carousel-item ,
-.carousel-item img  {
+.carousel-item,
+.carousel-item img {
   height: 500px;
 }
 
- .ongoing-background,  
- .completed-background{
+.ongoing-background,
+.completed-background {
   background-color: rgba(0, 0, 0, 0.3);
   padding: 20px;
   margin: auto;
   border-radius: 10px;
   box-shadow: 0px 1px 35px 0px rgba(0, 0, 0, 0.4);
   text-align: center;
-  
+
 }
 
-.completed-background{
+.completed-background {
   margin-bottom: 200px;
 }
 
-.ongoing-background .btn, 
-.completed-background .btn{
+.ongoing-background .btn,
+.completed-background .btn {
   width: 200px;
 }
 
@@ -114,11 +114,12 @@ body {
   margin: 0;
 }
 
-.footer p{
+.footer p {
   margin: 0;
   display: inline;
 }
-.footer .custom-switch{
+
+.footer .custom-switch {
   display: inline-block;
 }
 
@@ -128,6 +129,7 @@ body {
   --text-color: #222;
   --bkg-color: #fff;
 }
+
 body.dark-theme {
   --text-color: #eee;
   --bkg-color: #121212;
@@ -190,6 +192,7 @@ body.dark-theme {
 .info-anime {
   transition: 0.3s;
 }
+
 .info-anime:hover {
   box-shadow: 2px 3px 5px 2px rgba(0, 0, 0, 0.8);
 }
@@ -200,6 +203,7 @@ body.dark-theme {
   height: 30px;
   border-radius: 100%;
 }
+
 .fab {
   width: 10px;
   margin-right: 10px;
@@ -216,6 +220,7 @@ body.dark-theme {
 .bodyNot {
   background-image: url("../img/404.png");
 }
+
 .notfound {
   margin: 200px auto;
 }
@@ -223,6 +228,7 @@ body.dark-theme {
 .card-admin {
   margin-bottom: 20px;
 }
+
 .collapse {
   transition: 0.5s;
 }
@@ -302,11 +308,11 @@ body.dark-theme {
   position: relative;
 }
 
-.jadwalRilis{
+.jadwalRilis {
   margin-top: 30px;
 }
 
-.jadwalRilis .title{
+.jadwalRilis .title {
   width: 100%;
   padding: 5px;
   font-size: 30px;
@@ -314,7 +320,7 @@ body.dark-theme {
   color: white;
 }
 
-.jadwalRilis .item-row{
+.jadwalRilis .item-row {
   padding: 20px;
 }
 
@@ -324,18 +330,19 @@ body.dark-theme {
   transition: .3s;
   margin: 0;
 }
-.jadwalRilis .item:hover .rotated  {
+
+.jadwalRilis .item:hover .rotated {
   transform: rotateZ(-40deg);
 }
 
-.item-title{
+.item-title {
   margin: -15px;
 }
 
-.col-jadwal{
+.col-jadwal {
   box-shadow: 3px 3px 4px 5px rgba(0, 0, 0, 0.8);
   border-radius: 10px;
-  margin: 100px 0 ;
+  margin: 100px 0;
 }
 
 .col-jadwal a {
@@ -344,13 +351,13 @@ body.dark-theme {
 }
 
 
-.index{
+.index {
   display: inline-block;
   margin: auto;
   text-align: center;
 }
 
-.dark{
+.dark {
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
 }
@@ -358,4 +365,11 @@ body.dark-theme {
 .pagination {
   text-align: center;
   display: inline-block;
+}
+
+.modal-body {
+  position: relative;
+  overflow-y: auto;
+  max-height: 400px;
+  padding: 15px;
 }

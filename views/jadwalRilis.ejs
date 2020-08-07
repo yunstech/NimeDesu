@@ -76,7 +76,7 @@
                     <div class="content-jadwalrilis">
                         <ul>
                             <% post.forEach(function(item, index){ %>
-                            <% if(item.hariRilis === 'Jumat' || item.hariRilis === 'jumat'){ %>
+                            <% if(item.hariRilis === 'Jumat' || item.hariRilis === 'jumat' || item.hariRilis === 'jum'at' || item.hariRilis === 'Jum'at'){ %>
                             <li class="item-jadwalrilis"><span>> </span> <a
                                     href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
                             <% } %>
