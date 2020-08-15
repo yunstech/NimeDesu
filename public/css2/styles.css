@@ -211,6 +211,9 @@ body {
     #carouselExampleCaptions {
         display: none;
     }
+    .type-title h2 {
+        text-align: left;
+    }
 }
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */

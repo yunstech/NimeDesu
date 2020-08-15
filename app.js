@@ -175,6 +175,8 @@ let stringToHTML = function (str) {
 app.get("/", function (req, res) {
   AnimeInfo.find({
     type: "completed"
+  }).sort({
+    edited_on: 1
   }).exec(function (err, completed) {
     if (err) {
       res.render("404");
@@ -182,7 +184,7 @@ app.get("/", function (req, res) {
       AnimeInfo.find({
         type: "ongoing"
       }).sort({
-        date: 'desc'
+        edited_on: 1
       }).exec(function (err, docs) {
         if (err) {
           res.render("404");
