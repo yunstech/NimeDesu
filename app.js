@@ -43,9 +43,9 @@ app.use(passport.session());
 
 mongoose.connect(
   "mongodb+srv://yunstech:085862525407@nimedesu.drpdp.mongodb.net/NimeDesuDB?retryWrites=true&w=majority", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}
 );
 mongoose.set("useCreateIndex", true);
 
@@ -121,8 +121,8 @@ const animeInfoSchema = new mongoose.Schema({
   type: String,
   img: String,
   progress: String,
-  created_on: Date,
-  edited_on: Date,
+  created_on: String,
+  edited_on: String,
   hariRilis: String,
   sanitizeHtml: String,
 }, {
@@ -143,13 +143,6 @@ function truncateString(str, num) {
 const postSchema = new mongoose.Schema({
   faq: String,
 });
-
-var dateObj = new Date();
-var month = dateObj.getUTCMonth() + 1; //months from 1-12
-var day = dateObj.getUTCDate();
-var year = dateObj.getUTCFullYear();
-
-const newdate = year + "/" + month + "/" + day;
 
 const PostSchema = mongoose.model("PostSchema", postSchema);
 
@@ -176,6 +169,8 @@ let stringToHTML = function (str) {
   dom.innerHTML = str;
   return dom;
 };
+
+
 
 app.get("/", function (req, res) {
   AnimeInfo.find({
@@ -482,6 +477,12 @@ app.post("/add-genre", function (req, res) {
 });
 
 app.post("/upload-content", function (req, res) {
+  let d = new Date(),
+    month = (d.getMonth() + 1),
+    day = d.getDate(),
+    year = d.getFullYear();
+
+  let dates = `${ year } - ${ month } - ${ day }`;
   upload(req, res, (err) => {
     if (err) {
       res.render("404");
@@ -506,8 +507,8 @@ app.post("/upload-content", function (req, res) {
           link: req.body.link,
           type: req.body.option,
           img: req.file.filename,
-          created_on: newdate,
-          edited_on: newdate,
+          created_on: dates,
+          edited_on: dates,
           progress: req.body.progress,
           hariRilis: req.body.hariRilis
         });
@@ -552,6 +553,12 @@ app.post("/edit-post", function (req, res) {
 });
 
 app.post("/edit-content/:postId", function (req, res) {
+  let d = new Date(),
+    month = (d.getMonth() + 1),
+    day = d.getDate(),
+    year = d.getFullYear();
+
+  let dates = `${ year } - ${ month } - ${ day }`;
   const requestedPostId = req.params.postId;
 
   editImage(req, res, (err) => {
@@ -568,7 +575,7 @@ app.post("/edit-content/:postId", function (req, res) {
           objForUpdate.jumlahEpisode = req.body.jumlahEpisode;
         if (req.body.jumlahEpisodeTelahRilis)
           objForUpdate.jumlahEpisodeTelahRilis =
-          req.body.jumlahEpisodeTelahRilis;
+            req.body.jumlahEpisodeTelahRilis;
         if (req.body.musimRilis)
           objForUpdate.musimRilis = req.body.jumlahmusimRilispisode;
         if (req.body.tanggalTayang)
@@ -583,7 +590,7 @@ app.post("/edit-content/:postId", function (req, res) {
         if (req.body.progress) objForUpdate.progress = req.body.progress;
         if (req.body.option) objForUpdate.type = req.body.option;
         if (req.body.hariRilis) objForUpdate.hariRilis = req.body.hariRilis;
-        objForUpdate.edited_on = newdate;
+        objForUpdate.edited_on = dates;
 
         //before edit- There is no need for creating a new variable
         //var setObj = { $set: objForUpdate }
@@ -612,7 +619,7 @@ app.post("/edit-content/:postId", function (req, res) {
           objForUpdate.jumlahEpisode = req.body.jumlahEpisode;
         if (req.body.jumlahEpisodeTelahRilis)
           objForUpdate.jumlahEpisodeTelahRilis =
-          req.body.jumlahEpisodeTelahRilis;
+            req.body.jumlahEpisodeTelahRilis;
         if (req.body.musimRilis)
           objForUpdate.musimRilis = req.body.jumlahmusimRilispisode;
         if (req.body.tanggalTayang)
@@ -628,7 +635,7 @@ app.post("/edit-content/:postId", function (req, res) {
         if (req.body.option) objForUpdate.type = req.body.option;
         if (req.file) objForUpdate.img = req.file.filename;
         if (req.body.hariRilis) objForUpdate.hariRilis = req.body.hariRilis;
-        objForUpdate.edited_on = newdate;
+        objForUpdate.edited_on = dates;
 
         //before edit- There is no need for creating a new variable
         //var setObj = { $set: objForUpdate }
@@ -655,8 +662,8 @@ app.post("/edit-content/:postId", function (req, res) {
 
 app.post("/register", function (req, res) {
   Admin.register({
-      username: req.body.adminEmail
-    },
+    username: req.body.adminEmail
+  },
     req.body.adminPassword,
     function (err, user) {
       if (err) {
