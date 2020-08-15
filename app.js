@@ -480,9 +480,10 @@ app.post("/upload-content", function (req, res) {
   let d = new Date(),
     month = (d.getMonth() + 1),
     day = d.getDate(),
-    year = d.getFullYear();
+    year = d.getFullYear(),
+    hours = d.getHours()
 
-  let dates = `${ year } - ${ month } - ${ day }`;
+  let dates = `${ year } - ${ month } - ${ day } - ${ hours }`;
   upload(req, res, (err) => {
     if (err) {
       res.render("404");
@@ -557,8 +558,12 @@ app.post("/edit-content/:postId", function (req, res) {
     month = (d.getMonth() + 1),
     day = d.getDate(),
     year = d.getFullYear();
+  var h = d.getHours();
+  var m = d.getMinutes();
+  var s = d.getSeconds();
+  let x = h + ":" + m + ":" + s;
 
-  let dates = `${ year } - ${ month } - ${ day }`;
+  let dates = `${ year } - ${ month } - ${ day } - ${ x }`;
   const requestedPostId = req.params.postId;
 
   editImage(req, res, (err) => {
