@@ -172,6 +172,25 @@ let stringToHTML = function (str) {
 
 
 
+
+
+// *************  ROUTE  ************** \\
+
+
+app.get('/more/:postID', function (req, res) {
+
+  const requestedPostId = req.params.postID;
+  class UserPaginationExample {
+    getAll(limit = 0, skip = 0) {
+      return UsersModel.find({ type: requestedPostId })          // You may want to add a query
+        .sort({ _id: -1 })  // Use this to sort documents by newest first
+        .skip(skip)         // Always apply 'skip' before 'limit'
+        .limit(limit)       // This is your 'page size'
+    }
+  }
+})
+
+
 app.get("/", function (req, res) {
   AnimeInfo.find({
     type: "completed"
