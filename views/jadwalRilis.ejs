@@ -14,7 +14,8 @@
                             <% post.forEach(function(item, index){ %>
                             <% if(item.hariRilis === 'Senin' || item.hariRilis === 'senin'){ %>
                             <li class="item-jadwalrilis"><span>> </span> <a
-                                    href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
+                                    href="/anime/<%= change(item.judul) %>"><%= truncateString(item.judul, 20) %></a>
+                            </li>
                             <% } %>
 
                             <% }) %>
@@ -28,7 +29,8 @@
                             <% post.forEach(function(item, index){ %>
                             <% if(item.hariRilis === 'Selasa' || item.hariRilis === 'selasa'){ %>
                             <li class="item-jadwalrilis"><span>> </span> <a
-                                    href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
+                                    href="/anime/<%= change(item.judul) %>"><%= truncateString(item.judul, 20) %></a>
+                            </li>
                             <% } %>
 
                             <% }) %>
@@ -42,7 +44,8 @@
                             <% post.forEach(function(item, index){ %>
                             <% if(item.hariRilis === 'Rabu' || item.hariRilis === 'rabu'){ %>
                             <li class="item-jadwalrilis"><span>> </span> <a
-                                    href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
+                                    href="/anime/<%= change(item.judul) %>"><%= truncateString(item.judul, 20) %></a>
+                            </li>
                             <% } %>
 
                             <% }) %>
@@ -56,7 +59,8 @@
                             <% post.forEach(function(item, index){ %>
                             <% if(item.hariRilis === 'Kamis' || item.hariRilis === 'kamis'){ %>
                             <li class="item-jadwalrilis"><span>> </span> <a
-                                    href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
+                                    href="/anime/<%= change(item.judul) %>"><%= truncateString(item.judul, 20) %></a>
+                            </li>
                             <% } %>
 
                             <% }) %>
@@ -70,7 +74,8 @@
                             <% post.forEach(function(item, index){ %>
                             <% if(item.hariRilis === 'Jumat' || item.hariRilis === 'jumat'){ %>
                             <li class="item-jadwalrilis"><span>> </span> <a
-                                    href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
+                                    href="/anime/<%= change(item.judul) %>"><%= truncateString(item.judul, 20) %></a>
+                            </li>
                             <% } %>
 
                             <% }) %>
@@ -84,7 +89,8 @@
                             <% post.forEach(function(item, index){ %>
                             <% if(item.hariRilis === 'Sabtu' || item.hariRilis === 'sabtu'){ %>
                             <li class="item-jadwalrilis"><span>> </span> <a
-                                    href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
+                                    href="/anime/<%= change(item.judul) %>"><%= truncateString(item.judul, 20) %></a>
+                            </li>
                             <% } %>
 
                             <% }) %>
@@ -98,7 +104,8 @@
                             <% post.forEach(function(item, index){ %>
                             <% if(item.hariRilis === 'Minggu' || item.hariRilis === 'minggu'){ %>
                             <li class="item-jadwalrilis"><span>> </span> <a
-                                    href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
+                                    href="/anime/<%= change(item.judul) %>"><%= truncateString(item.judul, 20) %></a>
+                            </li>
                             <% } %>
 
                             <% }) %>

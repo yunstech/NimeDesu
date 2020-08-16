@@ -351,6 +351,7 @@ app.get('/jadwal-rilis', function (req, res) {
       res.render('jadwalRilis', {
         post: result,
         truncateString: truncateString,
+        change: urlEncode,
       })
     }
   })
