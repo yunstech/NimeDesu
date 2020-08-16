@@ -83,7 +83,7 @@ body {
 
 .carousel-caption {
     background-color: rgba(0, 0, 0, .6);
-    margin-bottom: 10%;
+    margin-bottom: 25%;
     border-radius: 5px;
 }
 
@@ -203,6 +203,20 @@ body {
     padding: 15px;
 }
 
+.jumbotron {
+    height: 500px;
+    background-size: cover;
+}
+
+.text-jumbotron {
+    text-align: center;
+    margin: 300px auto;
+    background-color: rgba(0, 0, 0, .8);
+    height: 100px;
+    width: fit-content;
+    color: white;
+    border-radius: 5px;
+}
 
 
 
@@ -212,6 +226,7 @@ body {
     #carouselExampleCaptions {
         display: none;
     }
+
     .type-title h2 {
         text-align: left;
     }
@@ -221,6 +236,30 @@ body {
 @media only screen and (max-width: 479px) {
     #carouselExampleCaptions {
         display: none;
+    }
+
+    .type-title h2 {
+        text-align: left;
+    }
+}
+
+@media only screen and (max-width: 1125px) {
+
+    .carousel-caption {
+        margin-bottom: 15%;
+
+    }
+
+    .type-title h2 {
+        text-align: left;
+    }
+}
+
+@media only screen and (max-width: 1030px) {
+
+    .carousel-caption {
+        margin-bottom: 8%;
+
     }
 
     .type-title h2 {

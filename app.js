@@ -43,9 +43,9 @@ app.use(passport.session());
 
 mongoose.connect(
   "mongodb+srv://yunstech:085862525407@nimedesu.drpdp.mongodb.net/NimeDesuDB?retryWrites=true&w=majority", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
 );
 mongoose.set("useCreateIndex", true);
 
@@ -101,6 +101,13 @@ passport.deserializeUser(Admin.deserializeUser());
 const genreSchema = new mongoose.Schema({
   genre: String,
 });
+const carouselSchema = new mongoose.Schema({
+  imgCarousel: String,
+  title: String,
+  deskripsi: String,
+});
+
+const Carousel = mongoose.model('Carousel', carouselSchema)
 
 const Genre = mongoose.model("Genre", genreSchema);
 
@@ -183,47 +190,67 @@ function urlEncode(link) {
 // *************  ROUTE  ************** \\
 
 
+app.get('/upload-image', function (req, res) {
+  if (req.isAuthenticated()) {
+    res.render('upload-image')
+  } else {
+    res.redirect('/admin021224')
+  }
+})
+
 app.get('/more/:postID', function (req, res) {
 
   const requestedPostId = req.params.postID;
   class UserPaginationExample {
     getAll(limit = 0, skip = 0) {
-      return UsersModel.find({ type: requestedPostId })          // You may want to add a query
-        .sort({ _id: -1 })  // Use this to sort documents by newest first
-        .skip(skip)         // Always apply 'skip' before 'limit'
-        .limit(limit)       // This is your 'page size'
+      return UsersModel.find({
+          type: requestedPostId
+        }) // You may want to add a query
+        .sort({
+          _id: -1
+        }) // Use this to sort documents by newest first
+        .skip(skip) // Always apply 'skip' before 'limit'
+        .limit(limit) // This is your 'page size'
     }
   }
 })
 
 
 app.get("/", function (req, res) {
-  AnimeInfo.find({
-    type: "completed"
-  }).sort({
-    edited_on: 1
-  }).exec(function (err, completed) {
+  Carousel.find({}, function (err, carouselResult) {
     if (err) {
-      res.render("404");
+      return null;
     } else {
       AnimeInfo.find({
-        type: "ongoing"
+        type: "completed"
       }).sort({
         edited_on: 1
-      }).exec(function (err, docs) {
+      }).exec(function (err, completed) {
         if (err) {
           res.render("404");
         } else {
-          res.render("index", {
-            completed: completed,
-            ongoing: docs,
-            truncateString: truncateString,
-            change: urlEncode,
+          AnimeInfo.find({
+            type: "ongoing"
+          }).sort({
+            edited_on: 1
+          }).exec(function (err, docs) {
+            if (err) {
+              res.render("404");
+            } else {
+              res.render("index", {
+                completed: completed,
+                ongoing: docs,
+                truncateString: truncateString,
+                change: urlEncode,
+                carousel: carouselResult
+              });
+            }
           });
         }
       });
     }
-  });
+  })
+
 });
 
 app.get("/daftar-anime", function (req, res) {
@@ -557,6 +584,34 @@ app.post("/upload-content", function (req, res) {
   });
 });
 
+app.post('/upload-carousel', function (req, res) {
+
+  upload(req, res, (err) => {
+    if (err) {
+      res.render("404");
+    } else {
+      if (req.file == undefined) {
+        res.render("404");
+      } else {
+        const newImg = new Carousel({
+          imgCarousel: req.file.filename,
+          title: req.body.title,
+          deskripsi: req.body.deskripsi
+        });
+
+        newImg.save(function (err) {
+          if (err) {
+            console.log(err);
+          } else {
+
+            res.redirect('/')
+          }
+        });
+      }
+    }
+  });
+})
+
 app.post("/edit-post", function (req, res) {
   const newPost = new PostSchema({
     faq: req.body.faq,
@@ -602,7 +657,7 @@ app.post("/edit-content/:postId", function (req, res) {
           objForUpdate.jumlahEpisode = req.body.jumlahEpisode;
         if (req.body.jumlahEpisodeTelahRilis)
           objForUpdate.jumlahEpisodeTelahRilis =
-            req.body.jumlahEpisodeTelahRilis;
+          req.body.jumlahEpisodeTelahRilis;
         if (req.body.musimRilis)
           objForUpdate.musimRilis = req.body.jumlahmusimRilispisode;
         if (req.body.tanggalTayang)
@@ -646,7 +701,7 @@ app.post("/edit-content/:postId", function (req, res) {
           objForUpdate.jumlahEpisode = req.body.jumlahEpisode;
         if (req.body.jumlahEpisodeTelahRilis)
           objForUpdate.jumlahEpisodeTelahRilis =
-            req.body.jumlahEpisodeTelahRilis;
+          req.body.jumlahEpisodeTelahRilis;
         if (req.body.musimRilis)
           objForUpdate.musimRilis = req.body.jumlahmusimRilispisode;
         if (req.body.tanggalTayang)
@@ -689,8 +744,8 @@ app.post("/edit-content/:postId", function (req, res) {
 
 app.post("/register", function (req, res) {
   Admin.register({
-    username: req.body.adminEmail
-  },
+      username: req.body.adminEmail
+    },
     req.body.adminPassword,
     function (err, user) {
       if (err) {
