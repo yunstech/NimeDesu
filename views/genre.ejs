@@ -5,7 +5,7 @@
     <div class="col-sm-8">
       <ul class="genreUser">
         <% genre.forEach(function(item, index){%>
-        <a href="search/<%= item._id %>" class="genreItem"><%= item.genre %></a>
+        <a href="/search/<%= change(item.genre) %>" class="genreItem"><%= item.genre %></a>
         <% }) %>
       </ul>
     </div>

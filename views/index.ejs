@@ -62,7 +62,7 @@
       <%if(index < 6){ %>
       <div class="col-lg-4 card-content">
         <div class="card" style="width: 18rem;">
-          <a href="/anime/<%= item._id %>"><img src="upload/<%= item.img %>" class="card-img-top" alt="Apa hayo"></a>
+          <a href="/anime/<%= change(item.judul) %>"><img src="upload/<%= item.img %>" class="card-img-top" alt="Apa hayo"></a>
           <p class="item">Episode : <%= item.jumlahEpisodeTelahRilis %></p>
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><%= truncateString(item.judul, 30) %></li>
@@ -102,7 +102,7 @@
       <%if(index < 6){ %>
       <div class="col-lg-4 card-content">
         <div class="card" style="width: 18rem;">
-          <a href="/anime/<%= item._id %>"><img src="upload/<%= item.img %>" class="card-img-top" alt="Apa hayo"></a>
+          <a href="/anime/<%= change(item.judul) %>"><img src="upload/<%= item.img %>" class="card-img-top" alt="Apa hayo"></a>
           <p class="item">⭐ <%= item.skor %></p>
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><%= truncateString(item.judul, 30) %></li>

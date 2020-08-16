@@ -3,8 +3,6 @@
 
 
 
-
-
 <section id="main">
     <div class="container">
         <div class="row">
@@ -29,13 +27,11 @@
                         <ul>
                             <% post.forEach(function(item, index){ %>
                             <% if(item.hariRilis === 'Selasa' || item.hariRilis === 'selasa'){ %>
-
                             <li class="item-jadwalrilis"><span>> </span> <a
                                     href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
                             <% } %>
 
                             <% }) %>
-
                         </ul>
                     </div>
                 </div>
@@ -45,13 +41,11 @@
                         <ul>
                             <% post.forEach(function(item, index){ %>
                             <% if(item.hariRilis === 'Rabu' || item.hariRilis === 'rabu'){ %>
-
                             <li class="item-jadwalrilis"><span>> </span> <a
                                     href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
                             <% } %>
 
                             <% }) %>
-
                         </ul>
                     </div>
                 </div>
@@ -61,22 +55,20 @@
                         <ul>
                             <% post.forEach(function(item, index){ %>
                             <% if(item.hariRilis === 'Kamis' || item.hariRilis === 'kamis'){ %>
-
                             <li class="item-jadwalrilis"><span>> </span> <a
                                     href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
                             <% } %>
 
                             <% }) %>
-
                         </ul>
                     </div>
                 </div>
                 <div class="hari">
-                    <p class="title-hari">JUMAT</p>
+                    <p class="title-hari">JUM'AT</p>
                     <div class="content-jadwalrilis">
                         <ul>
                             <% post.forEach(function(item, index){ %>
-                            <% if(item.hariRilis === 'Jumat' || item.hariRilis === 'jumat' || item.hariRilis === 'jum'at' || item.hariRilis === 'Jum'at'){ %>
+                            <% if(item.hariRilis === 'Jumat' || item.hariRilis === 'jumat'){ %>
                             <li class="item-jadwalrilis"><span>> </span> <a
                                     href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
                             <% } %>
@@ -91,7 +83,6 @@
                         <ul>
                             <% post.forEach(function(item, index){ %>
                             <% if(item.hariRilis === 'Sabtu' || item.hariRilis === 'sabtu'){ %>
-
                             <li class="item-jadwalrilis"><span>> </span> <a
                                     href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
                             <% } %>
@@ -106,7 +97,6 @@
                         <ul>
                             <% post.forEach(function(item, index){ %>
                             <% if(item.hariRilis === 'Minggu' || item.hariRilis === 'minggu'){ %>
-
                             <li class="item-jadwalrilis"><span>> </span> <a
                                     href="/anime/<%= item._id %>"><%= truncateString(item.judul, 20) %></a></li>
                             <% } %>
@@ -115,11 +105,13 @@
                         </ul>
                     </div>
                 </div>
+
             </div>
             <%- include('partials/toast') %>
         </div>
     </div>
 </section>
+
 
 
 

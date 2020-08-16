@@ -8,7 +8,7 @@
         <% anime.forEach(function(item, index) { %>
         <li class="list-group-item ">
           <div class="card-anime">
-            <a href="/anime/<%= item._id %>"
+            <a href="/anime/<%= change(item.judul) %>"
               ><%= truncateString(item.judul, 40) %></a
             >
             <div class="card-daftar-anime dark">

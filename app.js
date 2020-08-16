@@ -170,6 +170,12 @@ let stringToHTML = function (str) {
   return dom;
 };
 
+function urlEncode(link) {
+  let name = link;
+  let encodedLink = name.replace(/\s/g, '-');
+  return encodedLink
+}
+
 
 
 
@@ -212,6 +218,7 @@ app.get("/", function (req, res) {
             completed: completed,
             ongoing: docs,
             truncateString: truncateString,
+            change: urlEncode,
           });
         }
       });
@@ -229,31 +236,21 @@ app.get("/daftar-anime", function (req, res) {
         anime: result,
         date: today.getFullYear(),
         truncateString: truncateString,
+        change: urlEncode,
       });
     }
   });
 });
 
-app.get("/anime", function (req, res) {
-  AnimeInfo.findOne({
-    judul: "Manaria Friends BD"
-  }, function (err, info) {
-    if (err) {
-      res.redirect("/404");
-    } else {
-      res.render("anime", {
-        info: info,
-      });
-    }
-  });
-});
 
 app.get("/anime/:postId", function (req, res) {
   const requestedPostId = req.params.postId;
+  let cleanedLink = requestedPostId.replace(/-/g, ' ');
+  console.log(cleanedLink)
   const today = new Date();
 
   AnimeInfo.findOne({
-    _id: requestedPostId
+    judul: cleanedLink
   }, function (err, post) {
     if (err) {
       res.render("404");
@@ -284,6 +281,7 @@ app.get("/genre", function (req, res) {
       } else {
         res.render("genre", {
           genre: result,
+          change: urlEncode,
         });
       }
     });
@@ -417,6 +415,7 @@ app.get("/search", function (req, res) {
           post: found,
           truncateString: truncateString,
           search: req.query.search,
+          change: urlEncode,
         });
       }
     });
@@ -455,9 +454,10 @@ app.get("/delete/:postId", function (req, res) {
 
 app.get("/search/:postId", function (req, res) {
   const requestedPostId = req.params.postId;
-
+  let cleanedLink = requestedPostId.replace(/-/g, ' ');
+  console.log(cleanedLink)
   Genre.findOne({
-    _id: requestedPostId
+    genre: cleanedLink
   }, function (err, found) {
     AnimeInfo.find({
       genre: found.genre
@@ -469,6 +469,7 @@ app.get("/search/:postId", function (req, res) {
           post: result,
           truncateString: truncateString,
           search: found.genre,
+          change: urlEncode,
         });
       }
     });
