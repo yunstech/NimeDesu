@@ -243,7 +243,7 @@ body {
     }
 }
 
-@media only screen and (max-width: 1125px) {
+@media only screen and (max-width: 1125px) and (min-width: 1029px) {
 
     .carousel-caption {
         margin-bottom: 15%;
@@ -255,7 +255,7 @@ body {
     }
 }
 
-@media only screen and (max-width: 1030px) {
+@media only screen and (max-width: 1030px) and (min-width: 500px) {
 
     .carousel-caption {
         margin-bottom: 8%;

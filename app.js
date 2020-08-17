@@ -324,6 +324,7 @@ app.get("/admin021224", function (req, res) {
         res.render("admin", {
           post: found,
           truncateString: truncateString,
+          change: urlEncode,
         });
       }
     });
