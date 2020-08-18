@@ -542,7 +542,6 @@ app.post("/upload-content", function (req, res) {
       if (req.file == undefined) {
         res.render("404");
       } else {
-        let today = new Date();
         const newAnimeInfo = new AnimeInfo({
           judul: req.body.judulContent,
           judulAlternatif: req.body.judulAlternatif,
@@ -576,6 +575,7 @@ app.post("/upload-content", function (req, res) {
                 res.render("admin", {
                   post: found,
                   truncateString: truncateString,
+                  change: urlEncode,
                 });
               }
             });
