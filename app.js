@@ -291,11 +291,17 @@ app.get("/anime/:postId", function (req, res) {
   }, function (err, post) {
     if (err) {
       res.render("404");
+
     } else {
-      res.render("anime", {
-        info: post,
-        date: dates,
-      });
+      if (post != null || post != undefined) {
+        res.render("anime", {
+          info: post,
+          date: dates,
+        });
+      } else {
+        res.render("404");
+
+      }
     }
   });
 });
@@ -514,6 +520,10 @@ app.get("/search/:postId", function (req, res) {
     });
   });
 });
+
+app.get('*', function (req, res) {
+  res.render('404')
+})
 
 app.post("/add-genre", function (req, res) {
   const newGenre = new Genre({
