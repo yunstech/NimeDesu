@@ -179,7 +179,7 @@ let stringToHTML = function (str) {
 
 function urlEncode(link) {
   let name = link;
-  let encodedLink = name.replace(/\s/g, '-');
+  let encodedLink = name.replace(/\s/g, '+');
   return encodedLink
 }
 
@@ -254,14 +254,19 @@ app.get("/", function (req, res) {
 });
 
 app.get("/daftar-anime", function (req, res) {
-  const today = new Date();
+  let d = new Date(),
+    month = (d.getMonth() + 1),
+    day = d.getDate(),
+    year = d.getFullYear()
+
+  let dates = `${ year } - ${ month } - ${ day } - ${ hours }`;
   AnimeInfo.find({}, function (err, result) {
     if (err) {
       console.log(err);
     } else {
       res.render("daftar-anime", {
         anime: result,
-        date: today.getFullYear(),
+        date: dates,
         truncateString: truncateString,
         change: urlEncode,
       });
@@ -271,10 +276,15 @@ app.get("/daftar-anime", function (req, res) {
 
 
 app.get("/anime/:postId", function (req, res) {
+  let d = new Date(),
+    month = (d.getMonth() + 1),
+    day = d.getDate(),
+    year = d.getFullYear()
+
+  let dates = `${ year } - ${ month } - ${ day }`;
   const requestedPostId = req.params.postId;
-  let cleanedLink = requestedPostId.replace(/-/g, ' ');
-  console.log(cleanedLink)
-  const today = new Date();
+  let cleanedLink = requestedPostId.replace(/\+/g, ' ');
+
 
   AnimeInfo.findOne({
     judul: cleanedLink
@@ -284,7 +294,7 @@ app.get("/anime/:postId", function (req, res) {
     } else {
       res.render("anime", {
         info: post,
-        date: today.getFullYear(),
+        date: dates,
       });
     }
   });
@@ -483,7 +493,7 @@ app.get("/delete/:postId", function (req, res) {
 
 app.get("/search/:postId", function (req, res) {
   const requestedPostId = req.params.postId;
-  let cleanedLink = requestedPostId.replace(/-/g, ' ');
+  let cleanedLink = requestedPostId.replace(/\|/g, ' ');
   console.log(cleanedLink)
   Genre.findOne({
     genre: cleanedLink
@@ -534,7 +544,7 @@ app.post("/upload-content", function (req, res) {
     year = d.getFullYear(),
     hours = d.getHours()
 
-  let dates = `${ year } - ${ month } - ${ day } - ${ hours }`;
+  let dates = `${ year } - ${ month } - ${ day }`;
   upload(req, res, (err) => {
     if (err) {
       res.render("404");
