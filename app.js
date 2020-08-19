@@ -686,7 +686,9 @@ app.post("/edit-content/:postId", function (req, res) {
   let x = h + ":" + m + ":" + s;
 
   let dates = `${ year } - ${ month } - ${ day } - ${ x }`;
+
   const requestedPostId = req.params.postId;
+  let cleanedLink = requestedPostId.replace(/\+/g, ' ');
 
   editImage(req, res, (err) => {
     if (err) {
@@ -727,7 +729,7 @@ app.post("/edit-content/:postId", function (req, res) {
         };
 
         AnimeInfo.updateOne({
-          _id: requestedPostId
+          judul: cleanedLink
         }, objForUpdate, function (
           err
         ) {
@@ -772,7 +774,7 @@ app.post("/edit-content/:postId", function (req, res) {
         };
 
         AnimeInfo.updateOne({
-          _id: requestedPostId
+          judul: cleanedLink
         }, objForUpdate, function (
           err
         ) {
