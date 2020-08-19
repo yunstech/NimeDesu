@@ -12,8 +12,8 @@
         <div class="card-body">
           <p class="card-text">Genre: <%= item.genre.splice(0,3) %>...</p>
           <p class="card-text"><%= truncateString(item.sinopsis, 100) %></p>
-          <a href="/edit/<%= item._id %>" class="btn btn-primary">Edit</a>
-          <a href="/delete/<%= item._id %>" class="btn btn-danger">Delete</a>
+          <a href="/edit/<%= change(item.judul) %>" class="btn btn-primary">Edit</a>
+          <a href="/delete/<%= change(item.judul) %>" class="btn btn-danger">Delete</a>
         </div>
       </div>
     </div>

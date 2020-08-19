@@ -443,9 +443,10 @@ app.get("/delete", function (req, res) {
 app.get("/edit/:postId", function (req, res) {
   if (req.isAuthenticated()) {
     const requestedPostId = req.params.postId;
+    let cleanedLink = requestedPostId.replace(/\+/g, ' ');
 
     AnimeInfo.findOne({
-      _id: requestedPostId
+      judul: cleanedLink
     }, function (err, post) {
       if (err) {
         res.render("404");
@@ -504,10 +505,12 @@ app.get("/faq", function (req, res) {
 });
 
 app.get("/delete/:postId", function (req, res) {
+
   const requestedPostId = req.params.postId;
+  let cleanedLink = requestedPostId.replace(/\+/g, ' ');
 
   AnimeInfo.deleteOne({
-    _id: requestedPostId
+    judul: cleanedLink
   }, function (err) {
     if (err) {
       console.log(err);
