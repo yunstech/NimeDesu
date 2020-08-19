@@ -4,8 +4,8 @@
     <% post.reverse() %> <% post.forEach(function(item, index) { %>
     <div class="col-lg-4 card-content">
       <div class="card" style="width: 18rem;">
-        <a href="/anime/<%= change(item.judul) %>"><img src="upload/<%= item.img %>" class="card-img-top"
-            alt="<%= item.judul %> image"></a>
+        <a href="/anime/<%= change(item.judul) %>"><img src="upload/<%= item.img %>"
+            onerror="this.src='img/img-404.png'" class="card-img-top" alt="<%= item.judul %> image"></a>
         <ul class="list-group list-group-flush">
           <li class="list-group-item"><%= truncateString(item.judul, 30) %></li>
         </ul>

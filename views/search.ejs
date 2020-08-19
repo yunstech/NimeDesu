@@ -11,9 +11,8 @@
     <% post.forEach(function(item, index) { %> <%if(index < 6){ %>
     <div class="col-sm-4">
       <div class="card thumbnail-card">
-        <a href="/anime/<%= change(item.judul) %>"
-          ><img src="upload/<%= item.img %>" class="card-img-top" alt="..."
-        /></a>
+        <a href="/anime/<%= change(item.judul) %>"><img src="upload/<%= item.img %>"
+            onerror="this.src='img/img-404.png'" class="card-img-top" alt="..." /></a>
         <div class="card-body">
           <h5 class="card-title"><%= item.judul %></h5>
           <p class="card-text"><%= truncateString(item.sinopsis, 100) %></p>

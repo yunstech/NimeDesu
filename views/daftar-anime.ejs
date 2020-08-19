@@ -8,15 +8,10 @@
         <% anime.forEach(function(item, index) { %>
         <li class="list-group-item ">
           <div class="card-anime">
-            <a href="/anime/<%= change(item.judul) %>"
-              ><%= truncateString(item.judul, 40) %></a
-            >
+            <a href="/anime/<%= change(item.judul) %>"><%= truncateString(item.judul, 40) %></a>
             <div class="card-daftar-anime dark">
-              <img
-                src="upload/<%= item.img %>"
-                class="card-img-top img-thumbnail"
-                alt="..."
-              />
+              <img src="upload/<%= item.img %>" class="card-img-top img-thumbnail" alt="..."
+                onerror="this.src='img/img-404.png'" />
               <p class="card-text">
                 Sinopsis : <%= truncateString(item.sinopsis, 100) %>
               </p>

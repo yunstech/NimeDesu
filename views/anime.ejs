@@ -5,7 +5,8 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-8">
-      <img class="img-fluid anime-image" src="../upload/<%= info.img %>" alt="<%= info.judul %>">
+      <img class="img-fluid anime-image" src="../upload/<%= info.img %>" onerror="this.src='img/img-404.png'"
+        alt="<%= info.judul %>">
 
       <span>Uploaded By : <a href="https://www.instagram.com/yunstech">@Yunstech</a> With ❤</span>
       <br>
