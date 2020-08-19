@@ -20,6 +20,23 @@ const mongoose_fuzzy_searching = require("mongoose-fuzzy-searching");
 
 const app = express();
 
+
+
+// // Firebase
+
+// var firebaseConfig = {
+//   apiKey: '<your-api-key>',
+//   authDomain: '<your-auth-domain>',
+//   databaseURL: '<your-database-url>',
+//   storageBucket: 'gs://absensixips1.appspot.com/images'
+// };
+// firebase.initializeApp(firebaseConfig);
+
+// // Get a reference to the storage service, which is used to create references in your storage bucket
+// var storage = firebase.storage();
+
+// // End Firebase
+
 app.set("view engine", "ejs");
 app.use(bodyParser.json({
   limit: "50mb",
@@ -189,6 +206,9 @@ function urlEncode(link) {
 
 // *************  ROUTE  ************** \\
 
+app.get('/news', function (req, res) {
+  res.render('news')
+})
 
 app.get('/upload-image', function (req, res) {
   if (req.isAuthenticated()) {
