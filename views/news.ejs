@@ -40,7 +40,7 @@
         }
 
         .content {
-            margin: 100px auto;
+            margin: 150px auto;
         }
 
         .toast-img {
@@ -54,7 +54,7 @@
             font-size: 15px;
             font-family: "Roboto", sans-serif;
             border: 1px solid rgba(0, 0, 0, 0.8);
-            margin: 100px auto;
+            margin: 150px auto;
             border-radius: 10px;
             padding: 10px;
             box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.8);
@@ -64,6 +64,11 @@
         .toast-anime:hover {
             box-shadow: 1px 2px 3px 5px rgba(0, 0, 0, 0.8);
             cursor: pointer;
+        }
+
+        a.custom-card,
+        a.custom-card:hover {
+            color: inherit;
         }
     </style>
 
@@ -114,82 +119,47 @@
             </div>
         </nav>
 
-        <div class="container content">
+        <div class="container">
             <div class="row">
+                <div class=" col-sm-8 content">
+                    <div class="row">
 
-                <div class="col-md-8">
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row no-gutters">
-                            <div class="col-md-4">
-                                <img src="img/rakishi.jpg" class="card-img" alt="Rakishi">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural
-                                        lead-in to
-                                        additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <% post.forEach(function(item, index){ %>
+
+                        <div class="col-md-12">
+                            <a href="/news/<%= change(item.judul) %>" class="custom-card">
+                                <div class="card mb-3" ' style="max-width: 540px;">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        <img src="upload/<%= item.img %>" onerror="this.src=' img/img-404.png'"
+                                    class="card-img" alt="<%= item.judul %> image">
                                 </div>
-                            </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <%= item.judul %>
+                                        </h5>
+                                        <p class="card-text"><%= truncateString(item.konten, 250) %></p>
+                                        <p class="card-text"><small class="text-muted"><%= item.created_on %>
+                                                Author: Yunstech</small>
+                                        </p>
+                                    </div>
+                                </div>
                         </div>
                     </div>
-
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row no-gutters">
-                            <div class="col-md-4">
-                                <img src="img/rakishi.jpg" class="card-img" alt="Rakishi">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural
-                                        lead-in to
-                                        additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row no-gutters">
-                            <div class="col-md-4">
-                                <img src="img/rakishi.jpg" class="card-img" alt="Rakishi">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural
-                                        lead-in to
-                                        additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row no-gutters">
-                            <div class="col-md-4">
-                                <img src="img/rakishi.jpg" class="card-img" alt="Rakishi">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural
-                                        lead-in to
-                                        additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
+                    </a>
                 </div>
-                <%- include('partials/toast') %>
+                <% }) %>
             </div>
+
+
+
+
+
+
+        </div>
+        <%- include('partials/toast') %>
+        </div>
         </div>
 
         <%- include('partials/footer') %>

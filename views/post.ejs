@@ -1,0 +1,33 @@
+<%- include('partials/admin-header') %>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Upload News</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- Form Upload Content -->
+
+            <form action="/post-news" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Judul :</label>
+                    <input type="text" class="form-control" name="judulContent" />
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Konten :</label>
+                    <textarea class="form-control" name="konten" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Gambar Content</label>
+                    <input type="file" class="form-control-file" name="imageContent" id="imageContent" />
+                </div>
+                <br /><br />
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+        </div>
+    </div>
+
+    <%- include('partials/admin-footer') %>
+</div>

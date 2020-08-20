@@ -128,6 +128,16 @@ const Carousel = mongoose.model('Carousel', carouselSchema)
 
 const Genre = mongoose.model("Genre", genreSchema);
 
+const animeNewsSchema = new mongoose.Schema({
+  judul: String,
+  konten: String,
+  img: String,
+  created_on: String,
+  edited_on: String,
+})
+
+const News = mongoose.model("News", animeNewsSchema);
+
 const animeInfoSchema = new mongoose.Schema({
   judul: String,
   judulAlternatif: String,
@@ -207,7 +217,49 @@ function urlEncode(link) {
 // *************  ROUTE  ************** \\
 
 app.get('/news', function (req, res) {
-  res.render('news')
+  News.find({}, function (err, result) {
+    if (err) {
+      res.render('404')
+    } else {
+
+      res.render('news', {
+        post: result,
+        truncateString: truncateString,
+        change: urlEncode
+      })
+    }
+  })
+})
+
+app.get('/news/:postId', function (req, res) {
+  const requestedPostId = req.params.postId;
+  let cleanedLink = requestedPostId.replace(/\+/g, ' ');
+
+  News.findOne({
+    judul: cleanedLink
+  }, function (err, post) {
+    if (err) {
+      res.render("404");
+
+    } else {
+      if (post != null || post != undefined) {
+        res.render("news-detail", {
+          info: post,
+        });
+      } else {
+        res.render("404");
+
+      }
+    }
+  });
+})
+
+app.get('/post', function (req, res) {
+  if (req.isAuthenticated()) {
+    res.render('post')
+  } else {
+    res.redirect('/admin021224')
+  }
 })
 
 app.get('/upload-image', function (req, res) {
@@ -570,14 +622,65 @@ app.post("/add-genre", function (req, res) {
   });
 });
 
+app.post('/post-news', function (req, res) {
+  let d = new Date(),
+    month = (d.getMonth() + 1),
+    day = d.getDate(),
+    year = d.getFullYear();
+  var h = d.getHours();
+  var m = d.getMinutes();
+  var s = d.getSeconds();
+  let x = h + ":" + m + ":" + s;
+
+  let dates = `${ year } - ${ month } - ${ day } - ${ x }`;
+  upload(req, res, (err) => {
+    if (err) {
+      res.render("404");
+    } else {
+      if (req.file == undefined) {
+        res.render("404");
+      } else {
+        const newNews = new News({
+          judul: req.body.judulContent,
+          konten: req.body.konten,
+          img: req.file.filename,
+          created_on: dates,
+          edited_on: dates,
+        });
+
+        newNews.save(function (err) {
+          if (err) {
+            console.log(err);
+          } else {
+            AnimeInfo.find({}, function (err, found) {
+              if (err) {
+                res.render("404");
+              } else {
+                res.render("admin", {
+                  post: found,
+                  truncateString: truncateString,
+                  change: urlEncode,
+                });
+              }
+            });
+          }
+        });
+      }
+    }
+  });
+})
+
 app.post("/upload-content", function (req, res) {
   let d = new Date(),
     month = (d.getMonth() + 1),
     day = d.getDate(),
-    year = d.getFullYear(),
-    hours = d.getHours()
+    year = d.getFullYear();
+  var h = d.getHours();
+  var m = d.getMinutes();
+  var s = d.getSeconds();
+  let x = h + ":" + m + ":" + s;
 
-  let dates = `${ year } - ${ month } - ${ day }`;
+  let dates = `${ year } - ${ month } - ${ day } - ${ x }`;
   upload(req, res, (err) => {
     if (err) {
       res.render("404");
