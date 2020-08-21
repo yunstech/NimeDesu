@@ -1,0 +1,25 @@
+<%- include('partials/admin-header') %>
+<div class="container">
+
+    <a class="btn btn-primary" href="/post">Upload News</a>
+    <div class="row home-content">
+        <% post.reverse() %> <% post.forEach(function(item, index) { %>
+        <div class="col-lg-4 card-content">
+            <div class="card" style="width: 18rem;">
+                <a href="/anime/<%= change(item.judul) %>"><img src="upload/<%= item.img %>"
+                        onerror="this.src='img/img-404.png'" class="card-img-top" alt="<%= item.judul %> image"></a>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><%= truncateString(item.judul, 30) %></li>
+                </ul>
+                <div class="card-body">
+                    <a href="/delete-news/<%= change(item.judul) %>" name='news' class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+
+    </div>
+
+</div>
+
+<%- include('partials/admin-footer') %>

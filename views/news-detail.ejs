@@ -5,23 +5,15 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-8">
-            <div class="content" style="display: inline; text-align: right;">
-                <img class="img-fluid anime-image" align="left" src="../upload/<%= info.img %>"
+            <div class="content" style="display: inline; text-align: left;">
+                <img class="img-fluid" style="margin: 100px auto;" align="right" src="../upload/<%= info.img %>"
                     onerror="this.src='img/img-404.png'" alt="<%= info.judul %>">
+
                 <div class="content-isi" style="margin: 100px 0 50px 0;">
-                    <%= info.konten %>
+                    <%- info.konten -%>
                 </div>
             </div>
-            <div class="author">
-                <span>Uploaded By : <a href="https://www.instagram.com/yunstech">@Yunstech</a> With ❤</span>
-                <br>
-                <br>
-                <span>Upload Date : <%= info.created_on %></span>
-                <br>
-                <br>
-                <span>Fix Date : <%= info.edited_on %></span>
-                <br><br>
-            </div>
+
 
 
 

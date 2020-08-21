@@ -1,5 +1,7 @@
 <%- include('partials/admin-header') %>
 <div class="container">
+
+  <a class="btn btn-primary" href="/upload">Upload Anime</a>
   <div class="row home-content">
     <% post.reverse() %> <% post.forEach(function(item, index) { %>
     <div class="col-lg-4 card-content">
@@ -12,8 +14,8 @@
         <div class="card-body">
           <p class="card-text">Genre: <%= item.genre.splice(0,3) %>...</p>
           <p class="card-text"><%= truncateString(item.sinopsis, 100) %></p>
-          <a href="/edit/<%= change(item.judul) %>" class="btn btn-primary">Edit</a>
-          <a href="/delete/<%= change(item.judul) %>" class="btn btn-danger">Delete</a>
+          <a href="/edit/<%= change(item.judul) %>" name='anime' class="btn btn-primary">Edit</a>
+          <a href="/delete/<%= change(item.judul) %>" name='anime' class="btn btn-danger">Delete</a>
         </div>
       </div>
     </div>

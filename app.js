@@ -131,6 +131,7 @@ const Genre = mongoose.model("Genre", genreSchema);
 const animeNewsSchema = new mongoose.Schema({
   judul: String,
   konten: String,
+  kontenStr: String,
   img: String,
   created_on: String,
   edited_on: String,
@@ -217,7 +218,9 @@ function urlEncode(link) {
 // *************  ROUTE  ************** \\
 
 app.get('/news', function (req, res) {
-  News.find({}, function (err, result) {
+  News.find({}).sort({
+    edited_on: -1
+  }).exec(function (err, result) {
     if (err) {
       res.render('404')
     } else {
@@ -229,6 +232,27 @@ app.get('/news', function (req, res) {
       })
     }
   })
+})
+
+app.get('/admin-news', function (req, res) {
+  if (req.isAuthenticated()) {
+    News.find({}).sort({
+      edited_on: -1
+    }).exec(function (err, result) {
+      if (err) {
+        res.render('404')
+      } else {
+
+        res.render('admin-news', {
+          post: result,
+          truncateString: truncateString,
+          change: urlEncode
+        })
+      }
+    })
+  } else {
+    res.redirect('/admin021224')
+  }
 })
 
 app.get('/news/:postId', function (req, res) {
@@ -492,6 +516,21 @@ app.get("/delete", function (req, res) {
   }
 });
 
+app.get('/delete-news/:postId', function (req, res) {
+  const requestedPostId = req.params.postId;
+  let cleanedLink = requestedPostId.replace(/\+/g, ' ');
+
+  News.deleteOne({
+    judul: cleanedLink
+  }, function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/admin021224");
+    }
+  });
+})
+
 app.get("/edit/:postId", function (req, res) {
   if (req.isAuthenticated()) {
     const requestedPostId = req.params.postId;
@@ -643,6 +682,7 @@ app.post('/post-news', function (req, res) {
         const newNews = new News({
           judul: req.body.judulContent,
           konten: req.body.konten,
+          kontenStr: req.body.kontenStr,
           img: req.file.filename,
           created_on: dates,
           edited_on: dates,
@@ -652,17 +692,20 @@ app.post('/post-news', function (req, res) {
           if (err) {
             console.log(err);
           } else {
-            AnimeInfo.find({}, function (err, found) {
+            News.find({}).sort({
+              edited_on: -1
+            }).exec(function (err, result) {
               if (err) {
-                res.render("404");
+                res.render('404')
               } else {
-                res.render("admin", {
-                  post: found,
+
+                res.render('admin-news', {
+                  post: result,
                   truncateString: truncateString,
-                  change: urlEncode,
-                });
+                  change: urlEncode
+                })
               }
-            });
+            })
           }
         });
       }
